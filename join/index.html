@@ -1,173 +1,109 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="/favicon.ico" sizes="32x32">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <title>OuiSi — creative photo play, together</title>
-  <meta name="description" content="You've been invited to a OuiSi game — games of visual connection.">
-  <style>
-    /* the site's own copy of Figtree — no request to Google (11-02) */
-    @font-face{font-family:"Figtree";font-weight:400;font-style:normal;font-display:swap;src:url(/fonts/figtree-latin-400-normal.woff2) format("woff2")}
-    @font-face{font-family:"Figtree";font-weight:500;font-style:normal;font-display:swap;src:url(/fonts/figtree-latin-500-normal.woff2) format("woff2")}
-    @font-face{font-family:"Figtree";font-weight:600;font-style:normal;font-display:swap;src:url(/fonts/figtree-latin-600-normal.woff2) format("woff2")}
-    @font-face{font-family:"Figtree";font-weight:700;font-style:normal;font-display:swap;src:url(/fonts/figtree-latin-700-normal.woff2) format("woff2")}
-  </style>
-  <style>
-    :root {
-      --green: #87B46B;
-      --green-dark: #6E9553;
-      --ink: #282828;
-      --muted: #6b6b6b;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: "Figtree", -apple-system, sans-serif;
-      background: #fff;
-      color: var(--ink);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-    .topbar {
-      background: var(--green);
-      color: #fff;
-      text-align: center;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      padding: 10px 16px;
-    }
-    header { text-align: center; padding: 24px 16px 4px; }
-    .wordmark {
-      font-size: 24px;
-      letter-spacing: 9px;
-      text-transform: uppercase;
-      color: var(--ink);
-      text-decoration: none;
-    }
-    .wordmark .oui { font-weight: 300; }
-    .wordmark .si  { font-weight: 800; }
-    main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 32px 24px 56px;
-    }
-    .mark {
-      width: 84px; height: 84px;
-      background: #f7941e;
-      border-radius: 20px;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 22px;
-      box-shadow: 0 8px 24px rgba(0,0,0,.14);
-    }
-    .mark svg { width: 56px; height: 56px; }
-    .eyebrow {
-      color: var(--green-dark);
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-    h1 {
-      font-size: clamp(26px, 6vw, 34px);
-      font-weight: 800;
-      line-height: 1.2;
-      max-width: 420px;
-      margin-bottom: 12px;
-    }
-    p#subtitle {
-      font-size: 16px;
-      line-height: 1.6;
-      color: var(--muted);
-      max-width: 400px;
-      margin-bottom: 8px;
-    }
-    a.btn {
-      display: inline-block;
-      background: var(--green); color: #fff;
-      font-size: 14px; font-weight: 700;
-      letter-spacing: 1.5px; text-transform: uppercase;
-      text-decoration: none;
-      padding: 16px 34px; border-radius: 6px;
-      margin-top: 16px;
-    }
-    a.btn:hover { background: var(--green-dark); }
-    .steps {
-      text-align: left; max-width: 400px;
-      background: #f6f4ef; border-radius: 14px;
-      padding: 20px 24px; margin-top: 28px;
-      font-size: 15px; line-height: 1.7; color: var(--muted);
-    }
-    .steps strong { color: var(--ink); }
-    footer {
-      text-align: center; font-size: 13px; color: #a5a5a5;
-      padding: 20px 24px 32px;
-    }
-    footer a { color: #8a8a8a; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>You're invited to a Photologue | OuiSi</title>
+<meta name="description" content="You've been invited to a game of OuiSi Photologue.">
+<meta property="og:title" content="You're invited to a Photologue | OuiSi">
+<meta property="og:description" content="You've been invited to a game of OuiSi Photologue.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://ouisi.co/img/hero-narrative-1200.jpg">
+<meta property="og:url" content="https://ouisi.co/join/">
+<link rel="canonical" href="https://ouisi.co/join/">
+<meta name="theme-color" content="#87B46B">
+<link rel="icon" href="../favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="stylesheet" href="../css/site.css?v=3a408816">
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
-  <div class="topbar">Everything is connected</div>
-  <header>
-    <a class="wordmark" href="/"><span class="oui">Oui</span><span class="si">Si</span></a>
-  </header>
-  <main>
-    <div class="mark">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="48" r="32" fill="none" stroke="#fff" stroke-width="7"/>
-        <circle cx="40" cy="60" r="17" fill="#fff"/>
-      </svg>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="hdr">
+  <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="menu"><svg width="18" height="14" viewBox="0 0 18 14" aria-hidden="true"><path d="M0 1h18M0 13h18H0zm0-6h18H0z" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+  <a class="logo" href="../index.html" aria-label="OuiSi home"><img src="../img/logo-white-256.png" alt="OuiSi" width="128" height="24"></a>
+</header>
+<div id="menu" class="drawer" aria-hidden="true">
+  <button class="drawer-overlay" type="button" tabindex="-1" aria-label="Close menu"></button>
+  <nav class="drawer-panel" aria-label="Site">
+    <div class="drawer-head"><button class="drawer-close" type="button" aria-label="Close menu"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M13 13L1 1M13 1L1 13" stroke="currentColor" stroke-width="2" fill="none"/></svg></button></div>
+    <ul class="drawer-list">
+      <li><a class="h5" href="../index.html">Home</a></li>
+      <li><a class="h5" href="https://shop.ouisi.co">Shop</a></li>
+      <li><a class="h5" href="../apps/index.html">The apps</a></li>
+      <li><a class="h5" href="https://go.ouisi.co/guidebooks/">How to&nbsp;play</a></li>
+      <li><a class="h5" href="https://shop.ouisi.co/pages/about-us">About Us</a></li>
+      <li><a class="h5" href="mailto:info@ouisi.co">Contact Us</a></li>
+    </ul>
+  </nav>
+</div>
+<main id="main">
+<section class="sec page-top join">
+  <p class="eb">A game of visual&nbsp;connection</p>
+  <h1>You're invited to a&nbsp;Photologue</h1>
+  <p class="narrow" id="subtitle">If OuiSi Photologue is on your phone, tap below and you'll land in&nbsp;it.</p>
+  <a class="btn" id="openBtn" href="#" hidden>Open OuiSi Photologue</a>
+  <div class="join-steps">
+    <h2 class="h5">Don't have the app&nbsp;yet?</h2>
+    <ol>
+      <li><a href="https://testflight.apple.com/join/QNDk9C32">Install OuiSi Photologue from TestFlight.</a> It's a free public&nbsp;beta.</li>
+      <li>Open it once and sign in with your Apple&nbsp;ID.</li>
+      <li>Come back and tap your invite link again. You'll land in the&nbsp;Photologue.</li>
+    </ol>
+  </div>
+</section>
+<script>
+  // Invite links: ouisi.co/join?game=CODE. With the app installed, iOS opens it from the universal link and this page
+  // never shows; it is seen when the app is missing, inside Messages' own browser, or on a non-iPhone.
+  (function () {
+    var game = new URLSearchParams(window.location.search).get("game");
+    var sub = document.getElementById("subtitle");
+    if (game && /^[A-Fa-f0-9-]{8,40}$/.test(game)) {
+      var btn = document.getElementById("openBtn");
+      btn.href = "ouisi://join?game=" + encodeURIComponent(game);
+      btn.hidden = false;
+      btn.addEventListener("click", function () {
+        // If the app opened, this page is in the background and the timer never fires.
+        setTimeout(function () {
+          if (document.visibilityState === "visible") {
+            sub.innerHTML = "OuiSi Photologue didn't open. If it's installed, open this page in Safari " +
+              "(tap <strong>&hellip;</strong> below, then <strong>Open in Safari</strong>). " +
+              "If not, get the app below, then tap your invite link again.";
+          }
+        }, 1500);
+      });
+    } else {
+      sub.textContent = "This link is missing its game code. It may not have copied over completely. " +
+        "Try tapping the original link in your messages.";
+    }
+  })();
+</script>
+</main>
+<footer class="ftr">
+  <div class="grid">
+    <div class="colf">
+      <p class="eb">What's OuiSi?</p>
+      <p>Pronounced "We-See," OuiSi translates to "Yes Yes" from other languages. It's a nod to our belief that pictures are a language nearly all of us speak. OuiSi is based in the NY Hudson&nbsp;Valley.</p>
     </div>
-    <div class="eyebrow">A game of visual connection</div>
-    <h1>You&rsquo;re invited to play OuiSi!</h1>
-    <p id="subtitle">If OuiSi is installed, this page opens the app automatically.</p>
-    <a class="btn" id="openBtn" href="#" style="display:none">Open in OuiSi</a>
-    <div class="steps">
-      <strong>Don't have the app yet?</strong><br>
-      1. OuiSi is currently in private beta on TestFlight — ask your friend for a tester invite.<br>
-      2. Install OuiSi from the TestFlight invite.<br>
-      3. Come back and tap your invite link again — you'll drop right into the game.
+    <div class="colf">
+      <p class="eb">Footer menu</p>
+      <p class="links"><a href="https://shop.ouisi.co">Shop</a><a href="../apps/index.html">The apps</a><a href="https://go.ouisi.co/guidebooks/">How to play</a><a href="https://shop.ouisi.co/pages/about-us">About Us</a><a href="mailto:info@ouisi.co">Contact Us</a><a href="../privacy/index.html">Privacy Policy</a><a href="https://shop.ouisi.co/apps/enzuzo/tos">Terms of&nbsp;Service</a></p>
     </div>
-  </main>
-  <footer>
-    Games of Visual Connection &middot; <a href="https://shop.ouisi.co">shop.ouisi.co</a>
-  </footer>
-  <script>
-    (function () {
-      var params = new URLSearchParams(window.location.search);
-      var game = params.get("game");
-      if (game && /^[A-Fa-f0-9-]{8,40}$/.test(game)) {
-        var deepLink = "ouisi://join?game=" + encodeURIComponent(game);
-        var btn = document.getElementById("openBtn");
-        btn.href = deepLink;
-        btn.style.display = "inline-block";
-        btn.addEventListener("click", function () {
-          // If the app opened, this page is backgrounded and the timer never
-          // fires. If we're still visible, the app isn't installed (or the
-          // in-Messages browser blocked it) — say so instead of staying silent.
-          setTimeout(function () {
-            if (document.visibilityState === "visible") {
-              document.getElementById("subtitle").innerHTML =
-                "Hmm — OuiSi didn't open. If it's installed, try opening this page in Safari " +
-                "(tap <strong>&hellip;</strong> below, then <strong>Open in Safari</strong>). " +
-                "If not, follow the steps below to get the app first.";
-            }
-          }, 1500);
-        });
-      } else {
-        document.getElementById("subtitle").textContent =
-          "This link is missing its game code — it may not have copied over completely. Try tapping the original link in your messages.";
-      }
-    })();
-  </script>
+    <div class="colf connect">
+      <p class="eb">Let's connect!</p>
+      <div class="social">
+        <a href="https://www.facebook.com/playouisi/" aria-label="OuiSi on Facebook"><svg viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M13.5 22v-8.2h2.8l.4-3.3h-3.2V8.4c0-.9.3-1.6 1.6-1.6h1.7V3.9c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.3v2.4H7.4v3.3h2.8V22h3.3z"/></svg></a>
+        <a href="https://twitter.com/playouisi" aria-label="OuiSi on X"><svg viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M17.8 3h3.1l-6.8 7.8L22 21h-6.2l-4.9-6.4L5.3 21H2.2l7.3-8.3L2 3h6.4l4.4 5.8L17.8 3zm-1.1 16.2h1.7L7.4 4.7H5.6l11.1 14.5z"/></svg></a>
+        <a href="https://www.instagram.com/playouisi/" aria-label="OuiSi on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="#FFFFFF" stroke="none"/></svg></a>
+        <a href="https://www.pinterest.ca/PlayOuisi/" aria-label="OuiSi on Pinterest"><svg viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M12 2C6.5 2 3 5.9 3 10.1c0 2.6 1 4.9 3.2 5.8.4.1.7 0 .8-.4l.3-1.3c.1-.4.1-.5-.2-.8-.6-.8-1-1.7-1-3.1 0-4 3-7.6 7.8-7.6 4.3 0 6.6 2.6 6.6 6.1 0 4.6-2 8.5-5.1 8.5-1.7 0-2.9-1.4-2.5-3.1.5-2 1.4-4.2 1.4-5.7 0-1.3-.7-2.4-2.2-2.4-1.7 0-3.1 1.8-3.1 4.2 0 1.5.5 2.5.5 2.5l-2.1 8.8c-.6 2.6-.1 5.8 0 6.1 0 .2.3.2.4.1.2-.2 2.3-2.9 3-5.5l1.2-4.5c.6 1.1 2.2 2 4 2 5.2 0 8.8-4.8 8.8-11.1C21.5 6.2 17.5 2 12 2z"/></svg></a>
+        <a href="https://www.linkedin.com/company/ouisi/" aria-label="OuiSi on LinkedIn"><svg viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden="true"><path d="M6.9 21H3.3V9h3.6v12zM5.1 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2zM21 21h-3.6v-5.8c0-1.4 0-3.2-1.9-3.2s-2.2 1.5-2.2 3.1V21H9.7V9h3.4v1.6h.1c.5-.9 1.7-1.9 3.4-1.9 3.6 0 4.3 2.4 4.3 5.5V21z"/></svg></a>
+      </div>
+    </div>
+  </div>
+  <p class="fine">Nature photographs by the sixteen OuiSi Nature photographers, credited on every card's&nbsp;page.<br>OuiSi® is a registered trademark. © 2026 OuiSi&nbsp;Inc.</p>
+</footer>
+<script src="../js/site.js?v=3a408816"></script>
 </body>
 </html>
