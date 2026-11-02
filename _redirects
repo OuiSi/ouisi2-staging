@@ -6,9 +6,17 @@
 /original            https://shop.ouisi.co/original                                   301
 /blog                https://shop.ouisi.co/blogs/how-we-see-a-blog-on-connection      301
 /app                 /apps/                                                           301
+# The app policies moved to one pattern the day after launch (Paul, 11-02: "Why would these be different formats?").
+/apps/privacy        /apps/photologue/privacy/                                        301
+/apps/terms          /apps/photologue/terms/                                          301
+/apps/daily-privacy  /apps/daily/privacy/                                             301
+/apps/daily-terms    /apps/daily/terms/                                               301
+# Each app's own address lands on its section of /apps until there are app pages of their own.
+/apps/daily          /apps/#daily                                                     302
+/apps/photologue     /apps/#photologue                                                302
 #
 # The portal stays on go.ouisi.co until launch 2 — temporary redirects on purpose.
-/nature              https://go.ouisi.co/nature                                       302
+/nature              https://shop.ouisi.co/products/ouisi-nature-set                  301   # Paul, 11-02: the product page, like /original
 /learn               https://go.ouisi.co/games                                        302
 #
 # Shopify-era paths: ouisi.co is a connected domain that redirects to shop.ouisi.co today, path kept

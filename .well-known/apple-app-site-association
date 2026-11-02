@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": ["FWA3ZT658X.com.playouisi.app"],
+        "appID": "FWA3ZT658X.com.playouisi.app",
+        "paths": ["/join*"],
+        "components": [
+          { "/": "/join*" }
+        ]
+      }
+    ]
+  }
+}

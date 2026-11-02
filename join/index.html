@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <title>OuiSi — creative photo play, together</title>
+  <meta name="description" content="You've been invited to a OuiSi game — games of visual connection.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green: #87B46B;
+      --green-dark: #6E9553;
+      --ink: #282828;
+      --muted: #6b6b6b;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Figtree", -apple-system, sans-serif;
+      background: #fff;
+      color: var(--ink);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .topbar {
+      background: var(--green);
+      color: #fff;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 10px 16px;
+    }
+    header { text-align: center; padding: 24px 16px 4px; }
+    .wordmark {
+      font-size: 24px;
+      letter-spacing: 9px;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .wordmark .oui { font-weight: 300; }
+    .wordmark .si  { font-weight: 800; }
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 32px 24px 56px;
+    }
+    .mark {
+      width: 84px; height: 84px;
+      background: #f7941e;
+      border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 22px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.14);
+    }
+    .mark svg { width: 56px; height: 56px; }
+    .eyebrow {
+      color: var(--green-dark);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-size: clamp(26px, 6vw, 34px);
+      font-weight: 800;
+      line-height: 1.2;
+      max-width: 420px;
+      margin-bottom: 12px;
+    }
+    p#subtitle {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--muted);
+      max-width: 400px;
+      margin-bottom: 8px;
+    }
+    a.btn {
+      display: inline-block;
+      background: var(--green); color: #fff;
+      font-size: 14px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      text-decoration: none;
+      padding: 16px 34px; border-radius: 6px;
+      margin-top: 16px;
+    }
+    a.btn:hover { background: var(--green-dark); }
+    .steps {
+      text-align: left; max-width: 400px;
+      background: #f6f4ef; border-radius: 14px;
+      padding: 20px 24px; margin-top: 28px;
+      font-size: 15px; line-height: 1.7; color: var(--muted);
+    }
+    .steps strong { color: var(--ink); }
+    footer {
+      text-align: center; font-size: 13px; color: #a5a5a5;
+      padding: 20px 24px 32px;
+    }
+    footer a { color: #8a8a8a; }
+  </style>
+</head>
+<body>
+  <div class="topbar">Everything is connected</div>
+  <header>
+    <a class="wordmark" href="/"><span class="oui">Oui</span><span class="si">Si</span></a>
+  </header>
+  <main>
+    <div class="mark">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="48" r="32" fill="none" stroke="#fff" stroke-width="7"/>
+        <circle cx="40" cy="60" r="17" fill="#fff"/>
+      </svg>
+    </div>
+    <div class="eyebrow">A game of visual connection</div>
+    <h1>You&rsquo;re invited to play OuiSi!</h1>
+    <p id="subtitle">If OuiSi is installed, this page opens the app automatically.</p>
+    <a class="btn" id="openBtn" href="#" style="display:none">Open in OuiSi</a>
+    <div class="steps">
+      <strong>Don't have the app yet?</strong><br>
+      1. OuiSi is currently in private beta on TestFlight — ask your friend for a tester invite.<br>
+      2. Install OuiSi from the TestFlight invite.<br>
+      3. Come back and tap your invite link again — you'll drop right into the game.
+    </div>
+  </main>
+  <footer>
+    Games of Visual Connection &middot; <a href="https://shop.ouisi.co">shop.ouisi.co</a>
+  </footer>
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var game = params.get("game");
+      if (game && /^[A-Fa-f0-9-]{8,40}$/.test(game)) {
+        var deepLink = "ouisi://join?game=" + encodeURIComponent(game);
+        var btn = document.getElementById("openBtn");
+        btn.href = deepLink;
+        btn.style.display = "inline-block";
+        btn.addEventListener("click", function () {
+          // If the app opened, this page is backgrounded and the timer never
+          // fires. If we're still visible, the app isn't installed (or the
+          // in-Messages browser blocked it) — say so instead of staying silent.
+          setTimeout(function () {
+            if (document.visibilityState === "visible") {
+              document.getElementById("subtitle").innerHTML =
+                "Hmm — OuiSi didn't open. If it's installed, try opening this page in Safari " +
+                "(tap <strong>&hellip;</strong> below, then <strong>Open in Safari</strong>). " +
+                "If not, follow the steps below to get the app first.";
+            }
+          }, 1500);
+        });
+      } else {
+        document.getElementById("subtitle").textContent =
+          "This link is missing its game code — it may not have copied over completely. Try tapping the original link in your messages.";
+      }
+    })();
+  </script>
+</body>
+</html>
