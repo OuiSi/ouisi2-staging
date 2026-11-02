@@ -126,6 +126,10 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 .hdr[data-transparent] ~ main > .hero:first-child .in{padding-top:calc(var(--hdr-h) + 32px)}
 .hero h1{color:#fff;max-width:900px;font-size:min(var(--h1),11vw)}   /* fits the narrowest phones (320px) without breaking a joined pair */
 .hero.one h1{font-size:min(var(--h1),10vw)}   /* /apps: "from anywhere." is a longer joined pair */
+/* stacked and larger, as on the shop's hero (Paul, 11-02): the shop sets 40 / 58 from 741 / 72 from 1200, line-height 1
+   from 741, and a box narrow enough that the title takes two lines */
+@media (min-width:741px){.hero h1{line-height:1;max-width:11em}}
+@media (min-width:1200px){.hero h1,.hero.one h1{font-size:72px}}
 .hero .cta{display:flex;flex-direction:column;gap:12px;align-items:center;padding-top:8px}
 
 /* sets */
