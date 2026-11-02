@@ -137,13 +137,16 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 .tile{display:flex;flex-direction:column;align-items:center;gap:10px;min-width:0}
 .tile img{width:100%;aspect-ratio:1/1;object-fit:cover;background:#fff}
 .tile .h5{padding-top:6px;font-size:min(var(--h5),5.9vw)}   /* one line in a two-up tile down to 320px phones */
-.tile .line{font-size:min(15px,4.4vw);line-height:1.45;color:var(--ink-2);margin-top:-4px}   /* a touch smaller on the narrowest phones / bigger text, so no word sits alone */
+.tile{container-type:inline-size}
+/* two lines each, broken in the same place (Paul, 11-02: "balanced in terms of lines of text"); the size follows the
+   tile's width so "patterns and colors." always fits on its line, at any screen or text size */
+.tile .line{font-size:min(15px,10.5cqi);line-height:1.45;color:var(--ink-2);margin-top:-4px;white-space:nowrap}
 .tile .btn{margin-top:auto;width:100%;max-width:240px}   /* full buttons, not small ones (Paul, 10-30: "too small and underwhelming") */
 
 /* nature card lookup */
 .cardback{width:220px;border-radius:9%;box-shadow:0 10px 28px rgba(40,40,40,.14)}
 .lookup{display:flex;flex-direction:column;gap:12px;width:100%;align-items:center;padding-top:4px}
-.lookup input{width:min(100%,240px);height:var(--btn-h);padding:0 16px;border-radius:8px;border:1px solid var(--line);background:#fff;color:var(--ink);font-size:17px;text-align:center}
+.lookup input{width:min(100%,200px);height:var(--btn-h);padding:0 16px;border-radius:8px;border:1px solid var(--line);background:#fff;color:var(--ink);font-size:17px;text-align:center}
 .lookup .hint{font-size:14px;color:var(--ink-2);min-height:1.4em;line-height:1.4}
 
 /* reviews */
@@ -208,7 +211,7 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
   .hero .cta{flex-direction:row;gap:16px}
   .lookup{flex-direction:row;flex-wrap:wrap;max-width:480px}
   .lookup{justify-content:center}
-  .lookup input{flex:0 0 240px;width:240px;font-size:18px}   /* sized for a number (Paul, 10-30) */
+  .lookup input{flex:0 0 212px;width:212px;font-size:18px}   /* sized for a number: the hint plus a little room (Paul, 10-30 and 11-02) */
   .lookup .btn{flex:0 0 auto}
   .lookup .hint{flex:0 0 100%}
   .ftr .grid{gap:40px}
