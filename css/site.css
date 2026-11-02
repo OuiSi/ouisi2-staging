@@ -77,12 +77,12 @@ input::placeholder{color:var(--placeholder)}
 .cols{display:flex;flex-direction:column;align-items:center;gap:20px;width:100%}
 .col{display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center;width:100%;min-width:0}
 .fig{width:320px;max-width:100%}
-/* phones: text sits 48px from the edge, as on the shop (its rich-text blocks add 24px inside the 24px gutter);
+/* phones: text sits 36px from the edge — between ours (24) and the shop's (48): Paul, 11-02, "a bit tight" at 48;
    pictures, set tiles, screenshots, cards and buttons stay at 24px (Paul, 10-30: "Match the shop") */
 @media (max-width:740px){
-  .sec>p,.col>p{padding-left:24px;padding-right:24px;width:100%}
-  /* headings: the same 24px from 368px up, less on the narrowest phones so a joined pair like "from anywhere." still fits */
-  .sec>h1,.sec>h2,.sec>h3,.col>h1,.col>h2,.col>h3{padding-left:clamp(0px,calc((100vw - 320px) / 2),24px);padding-right:clamp(0px,calc((100vw - 320px) / 2),24px);width:100%}
+  .sec>p,.col>p{padding-left:12px;padding-right:12px;width:100%}
+  /* headings: the same 12px from 344px up, less on the narrowest phones so a joined pair like "from anywhere." still fits */
+  .sec>h1,.sec>h2,.sec>h3,.col>h1,.col>h2,.col>h3{padding-left:clamp(0px,calc((100vw - 320px) / 2),12px);padding-right:clamp(0px,calc((100vw - 320px) / 2),12px);width:100%}
 }
 
 /* the card, as drawn — measured from the print files 2026-10-22 (OUISI-KIT) */
@@ -137,7 +137,7 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 .tile{display:flex;flex-direction:column;align-items:center;gap:10px;min-width:0}
 .tile img{width:100%;aspect-ratio:1/1;object-fit:cover;background:#fff}
 .tile .h5{padding-top:6px;font-size:min(var(--h5),5.9vw)}   /* one line in a two-up tile down to 320px phones */
-.tile .line{font-size:15px;line-height:1.45;color:var(--ink-2);margin-top:-4px}
+.tile .line{font-size:min(15px,4.4vw);line-height:1.45;color:var(--ink-2);margin-top:-4px}   /* a touch smaller on the narrowest phones / bigger text, so no word sits alone */
 .tile .btn{margin-top:auto;width:100%;max-width:240px}   /* full buttons, not small ones (Paul, 10-30: "too small and underwhelming") */
 
 /* nature card lookup */
@@ -155,6 +155,10 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 .review .tick{color:var(--green)}
 .rooms{line-height:2.2}
 .rooms .dot{display:none}
+/* phones: one link per line with space between, so a link that wraps reads as one (Paul, 11-02) */
+@media (max-width:740px){.rooms{display:flex;flex-direction:column;align-items:center;gap:14px;line-height:1.5}.rooms br{display:none}}
+/* phones: both set names stacked the same way, whatever the text size (Paul, 11-02) */
+@media (max-width:740px){.tile h3 .nm{display:block}}
 
 /* close */
 .close{padding-top:56px;padding-bottom:56px}
@@ -171,7 +175,7 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 .ftr .colf p.links{line-height:2.4}
 .ftr .links a{display:block}
 .ftr .links a:hover{text-decoration:underline;text-underline-offset:4px}
-.social{display:grid;grid-template-columns:repeat(3,90px);border:1px solid var(--footer-line);width:270px}
+.social{display:grid;grid-template-columns:repeat(3,min(90px,calc((100vw - 2 * var(--gutter)) / 3)));border:1px solid var(--footer-line);width:max-content}   /* shrinks on the narrowest phones / bigger text instead of running off the edge */
 .social a{height:90px;display:flex;align-items:center;justify-content:center;border-right:1px solid var(--footer-line);border-bottom:1px solid var(--footer-line)}
 .social a:nth-child(3n){border-right:0}
 .social a:nth-child(n+4){border-bottom:0}
