@@ -33,5 +33,20 @@
 /account/*           https://shop.ouisi.co/account/:splat                             301
 /search              https://shop.ouisi.co/search                                     301
 #
-# Still to add before cutover: the store's own URL Redirects list (Shopify admin → Online Store →
-# Navigation → URL Redirects — Paul's export, outstanding since the runbook).
+# The store's own URL Redirects (Shopify admin → Content → Menus → URL redirects; Paul's paste, 11-03, page 1 of
+# the list). They broke on ouisi.co at launch; each goes to the same path on the shop, so Shopify keeps owning
+# where it lands (partner discount links: the code is applied there). /pages/* and /products/* are covered above.
+/yourdementiatherapist https://shop.ouisi.co/yourdementiatherapist                       301
+/granomontessori      https://shop.ouisi.co/granomontessori                             301
+/alyasali             https://shop.ouisi.co/alyasali                                    301
+/thememorycompass     https://shop.ouisi.co/thememorycompass                            301
+/theimaginarybridge   https://shop.ouisi.co/theimaginarybridge                          301
+/oursouthwestnest     https://shop.ouisi.co/oursouthwestnest                            301
+/runnercov            https://shop.ouisi.co/runnercov                                   301
+/tdnvl                https://shop.ouisi.co/tdnvl                                       301
+/adamhilledu          https://shop.ouisi.co/adamhilledu                                 301
+/upload               https://shop.ouisi.co/upload                                      301
+/zigazoo              https://shop.ouisi.co/zigazoo                                     301
+/sj-video-testimonial https://shop.ouisi.co/sj-video-testimonial                        301
+/discount/*          https://shop.ouisi.co/discount/:splat                            301   # Shopify discount links
+# Still to check: page 2 and on of the list, if there is one.
