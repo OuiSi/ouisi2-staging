@@ -307,6 +307,8 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 /* /apps, phone first (Paul, 2026-10-27: "mobile forward … scroll on mobile, spread out on desktop").
    Each app shows the front door's two screenshots, the same size (Paul, 10-30; one rising screenshot until then). */
 .qr{display:none}
+.pol{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 18px;font-size:14px}   /* each app's policies (Paul, 11-03) */
+.pol a{color:var(--ink-2);text-decoration:underline;text-underline-offset:3px}
 @media (min-width:1000px){
   .cols .shot-col.left{order:-1}
   .qr{display:flex;align-items:center;gap:16px;text-align:left;margin-top:4px}
