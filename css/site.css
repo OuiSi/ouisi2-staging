@@ -174,18 +174,18 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 
 /* footer */
 .ftr{background:var(--footer);color:#fff;padding:48px var(--gutter) 40px;text-align:left;display:flex;flex-direction:column;gap:32px}
-.ftr .grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+.ftr .grid{display:grid;grid-template-columns:minmax(0,1fr);gap:36px}   /* phones: stacked (Paul, 11-03: canvas "Phone 3") */
 .ftr .colf{display:flex;flex-direction:column;gap:14px;min-width:0}
 .ftr .colf.connect{grid-column:1 / -1}
 .ftr .colf p{font-size:17px;line-height:1.7}
 .ftr .colf p.eb{font-size:13px;line-height:1.5}   /* the boards: footer headings in eyebrow type */
 .ftr .colf p.links{line-height:2.4}
+.ftr .links{display:grid;grid-template-rows:repeat(4,auto);grid-auto-flow:column;grid-auto-columns:minmax(max-content,1fr);column-gap:24px}   /* the menu in two columns, 4 + 3, at every size (Paul, 11-03) */
 .ftr .links a{display:block}
 .ftr .links a:hover{text-decoration:underline;text-underline-offset:4px}
-.social{display:grid;grid-template-columns:repeat(3,min(90px,calc((100vw - 2 * var(--gutter)) / 3)));border:1px solid var(--footer-line);width:max-content}   /* shrinks on the narrowest phones / bigger text instead of running off the edge */
-.social a{height:90px;display:flex;align-items:center;justify-content:center;border-right:1px solid var(--footer-line);border-bottom:1px solid var(--footer-line)}
-.social a:nth-child(3n){border-right:0}
-.social a:nth-child(n+4){border-bottom:0}
+.social{display:grid;grid-template-columns:repeat(5,min(56px,calc((100vw - 2 * var(--gutter) - 2px) / 5)));border:1px solid var(--footer-line);width:max-content}   /* one row of five at every size (Paul, 11-03); shrinks on the narrowest phones */
+.social a{height:56px;display:flex;align-items:center;justify-content:center;border-right:1px solid var(--footer-line)}
+.social a:last-child{border-right:0}
 .social a:hover{background:#333}
 .social svg{width:18px;height:18px}
 .nw{white-space:nowrap}   /* "We-See," never splits at its hyphen (Paul, 11-03) */
@@ -227,11 +227,7 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
   .lookup input{flex:0 0 212px;width:212px;font-size:18px}   /* sized for a number: the hint plus a little room (Paul, 10-30 and 11-02) */
   .lookup .btn{flex:0 0 auto}
   .lookup .hint{flex:0 0 100%}
-  .ftr .grid{gap:40px}
-  .social{grid-template-columns:repeat(5,56px);width:auto}
-  .social a{height:56px;border-bottom:0}
-  .social a:nth-child(3n){border-right:1px solid var(--footer-line)}
-  .social a:last-child{border-right:0}
+  .ftr .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:40px}
   .rooms .dot{display:inline}
   .rooms br{display:none}
 }
@@ -265,6 +261,7 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
   .ftr{padding:64px var(--gutter) 48px;gap:48px}
   .ftr .grid{grid-template-columns:repeat(3,minmax(0,325px));justify-content:space-between;width:1360px;max-width:100%;margin:0 auto}
   .ftr .colf.connect{grid-column:auto}
+  .social{width:auto}
   .ftr .colf{gap:16px}
   .ftr .colf p:not(.eb){font-size:18px;line-height:1.73}
   .ftr .colf p.links{line-height:2.3}
