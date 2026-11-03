@@ -188,6 +188,7 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 .social a:nth-child(n+4){border-bottom:0}
 .social a:hover{background:#333}
 .social svg{width:18px;height:18px}
+.nw{white-space:nowrap}   /* "We-See," never splits at its hyphen (Paul, 11-03) */
 .ftr .fine{font-size:14px;line-height:1.6;color:var(--footer-muted)}
 
 /* inner pages (apps, policies) */
