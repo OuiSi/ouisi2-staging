@@ -45,6 +45,19 @@
     window.addEventListener('scroll', tick, { passive: true });
   }
 
+  // Photo Cards text on phones: the first sentence, then "Read more" opens the rest. Without script, all of it shows.
+  var more = document.querySelector('.more');
+  if (more && window.matchMedia('(max-width: 740px)').matches) {
+    var folds = document.querySelectorAll('.fold');
+    for (var i = 0; i < folds.length; i++) folds[i].classList.add('folded');
+    more.hidden = false;
+    more.addEventListener('click', function () {
+      for (var k = 0; k < folds.length; k++) folds[k].classList.remove('folded');
+      more.setAttribute('aria-expanded', 'true');
+      more.hidden = true;
+    });
+  }
+
   // Nature card lookup: the number on the card -> the same page its QR code opens.
   var form = document.getElementById('lookup');
   if (form) {
