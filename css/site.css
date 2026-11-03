@@ -307,6 +307,11 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
    Dynamic Island over the status bar. The outer ratio is the screen's plus the bezel: 1179 / 2468. */
 .shot{position:relative;margin:0;width:100%;aspect-ratio:1179/2468;padding:3.2%;border-radius:16% / 7.6%;overflow:hidden;background:#1d1d1f;box-shadow:inset 0 0 0 1px #3a3a3c,0 2px 6px rgba(40,40,40,.08),0 18px 40px rgba(40,40,40,.14)}
 .shot img{display:block;width:100%;height:100%;object-fit:cover;border-radius:13.5% / 6.2%}
+/* a phone frame takes its height from the screen inside it, not from aspect-ratio: Safari resolves the
+   screen's height:100% against the whole frame, so the screen hid the bottom bezel (Paul, 11-03). 936/2029 is the
+   frame's 1179/2468 less its 3.2% bezel on each side, so the frame is the same size as before. */
+.shot:not(.ph):not(.art){aspect-ratio:auto}
+.shot:not(.ph):not(.art) img{height:auto;aspect-ratio:936/2029}
 .shot:not(.ph):not(.art)::after{content:"";position:absolute;top:2.6%;left:36.5%;width:27%;height:3.7%;border-radius:99px;background:#000}
 .shot.art{aspect-ratio:auto;padding:0;background:#fff;border-radius:10px}
 .shot.ph{padding:0 12%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:0 12%;background:#ECE8DC;border:1px solid var(--line);box-shadow:none;color:var(--ink-2);text-align:center}
