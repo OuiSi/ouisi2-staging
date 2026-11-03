@@ -143,13 +143,16 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 .tile img{width:100%;aspect-ratio:1/1;object-fit:cover;background:#fff}
 .tile .h5{padding-top:6px;font-size:min(var(--h5),5.9vw)}   /* one line in a two-up tile down to 320px phones */
 .tile{container-type:inline-size}
-/* three sets: three across from 741; on phones a sideways row, the third peeking in from the right (Paul, 11-03) */
+/* three sets: three across from 741; on phones a sideways row of bigger tiles, one and a half in view (Paul, 11-03: canvas "Bigger tiles") */
 @media (max-width:740px){
-  .tiles{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:calc((100% - 16px) / 2.3);overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding:0 var(--gutter);margin:0 calc(-1 * var(--gutter));padding:8px var(--gutter) 4px;width:auto;align-self:stretch;scrollbar-width:none}
+  .tiles{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:calc((100% - 16px) / 1.5);overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding:0 var(--gutter);margin:0 calc(-1 * var(--gutter));padding:8px var(--gutter) 4px;width:auto;align-self:stretch;scrollbar-width:none}
   .tiles::-webkit-scrollbar{display:none}
   .tile{scroll-snap-align:start}
+  .tile .h5{font-size:min(21px,12cqi);letter-spacing:-0.3px;white-space:nowrap}   /* the name on one line */
+  .tile .btn.ghost{height:44px;max-width:200px}
 }
 @media (min-width:741px){.tiles{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@container (min-width:200px){.tile br.ph{display:none}}   /* br.ph: an extra break for tiles narrower than 200px only */
 /* two lines each, broken in the same place (Paul, 11-02: "balanced in terms of lines of text"); the size follows the
    tile's width so "patterns and colors." always fits on its line, at any screen or text size */
 .tile .line{font-size:min(15px,10.5cqi);line-height:1.45;color:var(--ink-2);margin-top:-4px;white-space:nowrap}
@@ -172,8 +175,7 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 .rooms .dot{display:none}
 /* phones: one link per line with space between, so a link that wraps reads as one (Paul, 11-02) */
 @media (max-width:740px){.rooms{display:flex;flex-direction:column;align-items:center;gap:14px;line-height:1.5}.rooms br{display:none}}
-/* phones: both set names stacked the same way, whatever the text size (Paul, 11-02) */
-@media (max-width:740px){.tile h3 .nm{display:block}}
+
 
 /* close */
 .close{padding-top:56px;padding-bottom:56px}
