@@ -70,6 +70,8 @@ input::placeholder{color:var(--placeholder)}
   transition:background-position .3s cubic-bezier(.215,.61,.355,1);transform:translateZ(0)}
 .btn:hover{background-position:100% 25%,100% 100%}
 .btn.sm{height:var(--btn-sm-h);padding:0 20px}
+/* the narrowest screens (a phone at a large page zoom): a long label wraps instead of running off the edge */
+@media (max-width:300px){.btn{white-space:normal;height:auto;min-height:var(--btn-h);padding:10px 18px;line-height:1.3;text-align:center}}
 /* the second-level button: outlined (Paul, 11-03: "an H2 button" under the filled ones); fills on hover */
 .btn.ghost{background:transparent;color:#4F6D3D;box-shadow:inset 0 0 0 2px rgb(var(--b));transition:background-color .2s,color .2s}
 .btn.ghost:hover{background:rgb(var(--b));color:#fff}
@@ -194,7 +196,8 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 .ftr .colf p{font-size:17px;line-height:1.7}
 .ftr .colf p.eb{font-size:13px;line-height:1.5}   /* the boards: footer headings in eyebrow type */
 .ftr .colf p.links{line-height:2.4}
-.ftr .links{display:grid;grid-template-rows:repeat(4,auto);grid-auto-flow:column;grid-auto-columns:minmax(max-content,1fr);column-gap:24px}   /* the menu in two columns, 4 + 3, at every size (Paul, 11-03) */
+.ftr .links{display:grid;grid-template-rows:repeat(4,auto);grid-auto-flow:column;grid-auto-columns:minmax(max-content,1fr);column-gap:24px}
+@media (max-width:300px){.ftr .links{grid-auto-columns:minmax(0,1fr);column-gap:16px}}   /* and the menu may wrap there, rather than widen the page */   /* the menu in two columns, 4 + 3, at every size (Paul, 11-03) */
 .ftr .links a{display:block}
 .ftr .links a:hover{text-decoration:underline;text-underline-offset:4px}
 .social{display:grid;grid-template-columns:repeat(5,min(56px,calc((100vw - 2 * var(--gutter) - 2px) / 5)));border:1px solid var(--footer-line);width:max-content}   /* one row of five at every size (Paul, 11-03); shrinks on the narrowest phones */
@@ -222,6 +225,9 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 .join-steps ol{margin:12px 0 0;padding:0;list-style-position:inside;display:flex;flex-direction:column;gap:10px;line-height:1.5}
 .legal{max-width:680px;margin:0 auto;padding:48px var(--gutter) 72px;text-align:left}
 .legal h1{font-size:var(--h2);letter-spacing:-.02em}
+/* the narrowest screens (a phone at a large page zoom): headings follow the width, so a joined last pair
+   ("from anywhere.", "a Photologue") never runs past the edge */
+@media (max-width:300px){h1{font-size:min(var(--h1),12vw)}h2,.legal h1{font-size:min(var(--h2),9.5vw)}}
 .legal .date{color:var(--ink-2);font-size:15px;margin:8px 0 28px}
 .legal h2{font-family:var(--sans);font-size:19px;font-weight:700;letter-spacing:0;margin:28px 0 8px;line-height:1.35}
 .legal p,.legal li{margin-bottom:12px;line-height:1.65}
