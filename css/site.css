@@ -22,6 +22,7 @@
   --footer:#282828;
   --footer-line:#4A4A46;
   --footer-muted:#BDBDB7;
+  --footer-band:#363634;
   --placeholder:#8A8A84;
   --sans:"Figtree","Helvetica Neue",Arial,sans-serif;
   --display:"Poppins",Arial,sans-serif;
@@ -188,6 +189,11 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 .social a:last-child{border-right:0}
 .social a:hover{background:#333}
 .social svg{width:18px;height:18px}
+/* phones: the menu on a lighter band, hairlines a shade lighter than the band (Paul, 11-03: canvas A + B) */
+@media (max-width:740px){
+  .ftr .colf:nth-child(2){background:var(--footer-band);margin:0 calc(-1 * var(--gutter));padding:32px var(--gutter);border-top:1px solid var(--footer-line);border-bottom:1px solid var(--footer-line)}
+  .ftr .fine{border-top:1px solid var(--footer-line);padding-top:32px}
+}
 .nw{white-space:nowrap}   /* "We-See," never splits at its hyphen (Paul, 11-03) */
 .ftr .fine{font-size:14px;line-height:1.6;color:var(--footer-muted)}
 
