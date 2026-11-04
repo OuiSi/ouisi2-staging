@@ -228,6 +228,23 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 .langs{display:grid;grid-template-columns:repeat(3,auto);justify-content:center;gap:10px 24px;font-size:17px}   /* three and two, never one left alone */
 .langs a{text-decoration:underline;text-underline-offset:3px}
 @media (min-width:741px){.vids{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;max-width:1000px}.books{grid-template-columns:repeat(2,minmax(0,1fr));max-width:900px}}
+/* /learn, OuiSi Nature, for someone who already has the cards (Paul, 11-04): real cards, then the photographers */
+.ncards{list-style:none;margin:0;padding:0;width:100%}
+.ncards .card{display:block}
+@media (max-width:740px){
+  .ncards{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 24px) / 2.5);gap:12px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding:0 var(--gutter);margin:0 calc(-1 * var(--gutter));padding:8px var(--gutter);width:auto;align-self:stretch;scrollbar-width:none}
+  .ncards::-webkit-scrollbar{display:none}
+  .ncards li{scroll-snap-align:start}
+}
+@media (min-width:741px){.ncards{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px;max-width:1000px;padding-top:8px}}
+.photogs-h{margin-top:28px;text-align:center}
+.photogs{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px 12px;width:100%;max-width:1000px}
+.photogs a{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;font-size:13px;line-height:1.3;font-weight:600;min-width:0}
+.photogs span{overflow-wrap:break-word;hyphens:manual}   /* first names over surnames; a long surname breaks at its hyphen */
+.photogs img{width:100%;aspect-ratio:1/1;border-radius:50%;object-fit:cover;background:#fff}
+.photogs a:hover span{text-decoration:underline;text-underline-offset:3px}
+@media (min-width:741px){.photogs{grid-template-columns:repeat(8,minmax(0,1fr));gap:24px 20px}.photogs a{font-size:14px}}
+.sec>.ncards,.sec>.photogs{max-width:1000px}   /* beats the general .sec>* width rule */
 .book .cover{display:none}   /* the covers show on desktop only (Paul, 11-04: canvas "1 · side by side") */
 /* desktop: the videos and the guidebooks side by side in one cream band; videos as a list, guidebooks with covers */
 @media (min-width:1000px){
