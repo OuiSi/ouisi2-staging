@@ -228,6 +228,22 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 .langs{display:grid;grid-template-columns:repeat(3,auto);justify-content:center;gap:10px 24px;font-size:17px}   /* three and two, never one left alone */
 .langs a{text-decoration:underline;text-underline-offset:3px}
 @media (min-width:741px){.vids{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;max-width:1000px}.books{grid-template-columns:repeat(2,minmax(0,1fr));max-width:900px}}
+.book .cover{display:none}   /* the covers show on desktop only (Paul, 11-04: canvas "1 · side by side") */
+/* desktop: the videos and the guidebooks side by side in one cream band; videos as a list, guidebooks with covers */
+@media (min-width:1000px){
+  .learn-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:96px;background:var(--cream);padding:64px max(var(--gutter),calc((100% - 1200px) / 2)) 80px;align-items:start}
+  .learn-two>.sec{background:none;padding:0;align-items:stretch;text-align:left;gap:20px}
+  .learn-two h2{font-size:40px;letter-spacing:-.8px}
+  .learn-two .vids{grid-template-columns:minmax(0,1fr);gap:0;max-width:none;border-top:1px solid var(--line)}
+  .learn-two .vids li{flex-direction:row;justify-content:flex-start;align-items:center;gap:12px;background:none;box-shadow:none;border-radius:0;padding:16px 0;border-bottom:1px solid var(--line);text-align:left}
+  .learn-two .vids .h5{font-size:22px}
+  .learn-two .vids .eb{order:1;margin:0;font-size:11px}
+  .learn-two .vids .lk{order:2;margin-left:auto}
+  .learn-two .books{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;max-width:none;padding-top:4px}
+  .learn-two .book{align-items:flex-start;text-align:left;gap:14px}
+  .learn-two .book .cover{display:block;width:100%;height:auto;border-radius:6px;background:#fff;box-shadow:0 2px 6px rgba(40,40,40,.08),0 14px 30px rgba(40,40,40,.12)}
+  .learn-two .langs{justify-content:start;gap:6px 16px;font-size:16px}
+}
 .join{min-height:60vh}
 .join .btn[hidden]{display:none}
 .join-steps{background:#fff;border-radius:12px;box-shadow:0 2px 10px rgba(40,40,40,.06);padding:24px 22px;width:100%;text-align:center;margin-top:12px}   /* centred like the rest of the page (Paul, 11-02) */
