@@ -17,7 +17,7 @@
 #
 # The portal stays on go.ouisi.co until launch 2 — temporary redirects on purpose.
 /nature              https://shop.ouisi.co/products/ouisi-nature-set                  301   # Paul, 11-02: the product page, like /original
-/learn               https://go.ouisi.co/guidebooks/                                  302   # go.ouisi.co/games is gone (11-02)
+# /learn is a page of its own from 11-04 (Paul: "Start building").
 #
 # Shopify-era paths: ouisi.co is a connected domain that redirects to shop.ouisi.co today, path kept
 # (that is how ouisi.co/original works). These keep old links landing where they land now.

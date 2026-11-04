@@ -216,6 +216,18 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 /* inner pages (apps, policies) */
 .page-top{padding-top:56px}
 /* the invite page (/join/): the site's look, the steps in a card (11-02) */
+/* /learn: how to play — the videos, the guidebooks, then the door to the OuiSi Nature Learning Portal (Paul, 11-04) */
+.learn-top{padding-bottom:40px}
+@media (min-width:1000px){.learn-top{padding-top:72px;padding-bottom:56px}}
+.vids{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:100%}
+.vids li{background:#fff;border-radius:12px;box-shadow:0 2px 10px rgba(40,40,40,.06);padding:20px 12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;min-width:0}
+.vids .eb{font-size:11px;margin-bottom:-4px;color:var(--ink-2)}
+.vids .h5{font-size:min(var(--h5),6vw)}
+.books{display:grid;grid-template-columns:minmax(0,1fr);gap:28px;width:100%;max-width:640px}
+.book{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
+.langs{display:grid;grid-template-columns:repeat(3,auto);justify-content:center;gap:10px 24px;font-size:17px}   /* three and two, never one left alone */
+.langs a{text-decoration:underline;text-underline-offset:3px}
+@media (min-width:741px){.vids{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;max-width:1000px}.books{grid-template-columns:repeat(2,minmax(0,1fr));max-width:900px}}
 .join{min-height:60vh}
 .join .btn[hidden]{display:none}
 .join-steps{background:#fff;border-radius:12px;box-shadow:0 2px 10px rgba(40,40,40,.06);padding:24px 22px;width:100%;text-align:center;margin-top:12px}   /* centred like the rest of the page (Paul, 11-02) */
