@@ -3,7 +3,7 @@
 #
 # Printed paths and the two the runbook names. /original is a store-wide Shopify redirect today
 # (WEB-MIGRATION-RUNBOOK, "the trap") — sending it to the shop keeps the guidebook's URL alive.
-/original            https://shop.ouisi.co/original                                   301
+/original            https://shop.ouisi.co/products/connecting-photo-cards            301   # Paul, 11-04: straight to the product page, not via the shop's own /original redirect
 /blog                https://shop.ouisi.co/blogs/how-we-see-a-blog-on-connection      301
 /app                 /apps/                                                           301
 # The app policies moved to one pattern the day after launch (Paul, 11-02: "Why would these be different formats?").
