@@ -258,7 +258,9 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 .langs a{text-decoration:underline;text-underline-offset:3px}
 /* /learn (Paul, 11-05: canvas "D · Each photographer with their card"): the lookup, then twelve cards, each with what
    it shows, who took it and their portrait on its corner, then the other photographers */
-.learn-head{padding-bottom:40px}
+.learn-head{padding-bottom:40px;background:var(--paper,#faf9f6) url(../img/learn-wall-800.jpg) center/cover no-repeat}   /* a greyed wall of 88 Nature cards behind the heading (Paul, 11-05) */
+@media (min-width:741px){.learn-head{padding-bottom:56px;background-image:url(../img/learn-wall-2880.jpg)}}   /* 152 cards from 741px */
+.learn-head .lookup .hint{color:var(--ink)}   /* the grey would fail over a dark card */
 .lh-text{display:flex;flex-direction:column;align-items:center;gap:12px}
 @media (min-width:1000px){
   .sec.learn-head{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;column-gap:64px;text-align:left;padding-left:max(var(--gutter),calc((100% - 1200px) / 2));padding-right:max(var(--gutter),calc((100% - 1200px) / 2))}
