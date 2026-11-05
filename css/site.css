@@ -218,8 +218,6 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 /* the invite page (/join/): the site's look, the steps in a card (11-02) */
 /* /how-to-play (Paul, 11-05: canvas "A · One row per game", two levels that open): the guidebooks' four groups,
    each game inside opening to its own words from the Guidebook; the Guidebooks beside the list on desktop */
-.learn-top{padding-bottom:40px}
-@media (min-width:1000px){.learn-top{padding-top:72px;padding-bottom:56px}}
 .sec>.htp-wrap{width:100%;max-width:1200px;display:flex;flex-direction:column;gap:48px;text-align:left}
 @media (min-width:1000px){.sec>.htp-wrap{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:96px;align-items:start}}
 .grps{border-top:1px solid var(--line)}
@@ -258,15 +256,12 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 .langs a{text-decoration:underline;text-underline-offset:3px}
 /* /learn (Paul, 11-05: canvas "D · Each photographer with their card"): the lookup, then twelve cards, each with what
    it shows, who took it and their portrait on its corner, then the other photographers */
-.learn-head{padding-bottom:40px;background:var(--paper,#faf9f6) url(../img/learn-wall-800.jpg) center/cover no-repeat}   /* a greyed wall of 88 Nature cards behind the heading (Paul, 11-05) */
-@media (min-width:741px){.learn-head{padding-bottom:56px;background-image:url(../img/learn-wall-2880.jpg)}}   /* 152 cards from 741px */
-.lh-text{display:flex;flex-direction:column;align-items:center;gap:12px}
-@media (min-width:1000px){
-  .sec.learn-head{align-items:flex-start;text-align:left;padding-left:max(var(--gutter),calc((100% - 1200px) / 2));padding-right:max(var(--gutter),calc((100% - 1200px) / 2))}   /* the lookup moved to the band below (Paul, 11-05) */
-  .sec.learn-head>*{max-width:none}
-  .lh-text{align-items:flex-start}
-  .lh-text h1{max-width:13em}
-}
+/* /learn and /how-to-play open on the photo hero, as the front door and /apps (Paul, 11-05: one standard for the
+   pages people come to explore): /learn's photo is the Nature cards in colour (tools/learn_wall.py), /how-to-play's
+   Paul's own photo of a game (11-02) */
+.hero .hero-line{max-width:34em;padding:0 12px;font-size:17px;line-height:1.6}
+@media (min-width:741px){.hero .hero-line{padding:0;font-size:18px}}
+.hero .ph.htp-ph{object-position:50% 52%}   /* the chain of cards, where the desktop hero crops the tall photo */
 /* /learn, under the heading: card 1's front and back and what to do with them, as on the Nature guidebook's QR page
    (Paul, 11-05: "a reminder of what you do next … best is scanning the QR code"); the lookup moved here from the heading */
 .lq-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;width:100%;max-width:340px;justify-self:center}
