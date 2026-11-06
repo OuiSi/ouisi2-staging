@@ -1,4 +1,4 @@
-/* ouisi.co — the menu drawer, the header over the hero, the Nature card lookup. No dependencies. */
+/* ouisi.co — the menu drawer, the header over the hero, the Nature card lookup, the front door slideshow. No dependencies. */
 (function () {
   // Menu: the shop's drawer, from the left. Escape, the veil and the close button all shut it;
   // focus stays inside while it is open and returns to the menu button after.
@@ -74,5 +74,76 @@
       }
     });
     input.addEventListener('input', function () { if (hint) hint.textContent = ''; });
+  }
+
+  // The front door's slideshow: the shop's (Focal) hero as read from its theme. Two slides, 4s each; the current bar
+  // fills over the 4s and its end moves the show on. The next slide sweeps in from the right (0.5s), then its eyebrow,
+  // heading and buttons rise in 0.1s apart. Swipe on touch; each bar is a button. A fade under reduced motion.
+  // It holds still while a keyboard is inside it, while it is off the screen and while the tab is hidden.
+  var show = document.querySelector('.hero.show');
+  var slides = show ? show.querySelectorAll('.slide') : [];
+  var nav = show ? show.querySelector('.dots') : null;
+  var bars = nav ? nav.querySelectorAll('button') : [];
+  if (slides.length > 1 && bars.length === slides.length) {
+    var cur = 0, busy = false, holds = {};
+    var still = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var hold = function (why, on) {
+      if (on) { holds[why] = 1; } else { delete holds[why]; }
+      show.classList.toggle('paused', Object.keys(holds).length > 0);
+    };
+    var run = function (i) {
+      for (var k = 0; k < bars.length; k++) {
+        bars[k].classList.remove('run');
+        bars[k].setAttribute('aria-current', k === i ? 'true' : 'false');
+      }
+      void bars[i].offsetWidth;   // restarts the fill
+      bars[i].classList.add('run');
+    };
+    var go = function (i, fromLeft) {
+      if (busy || i === cur) return;
+      var from = slides[cur], to = slides[i];
+      busy = true;
+      to.classList.add('on', 'top');
+      run(i);
+      var done = function () { from.classList.remove('on'); to.classList.remove('top'); cur = i; busy = false; };
+      if (!to.animate) { done(); return; }
+      if (still.matches) {
+        to.animate({ opacity: [0, 1] }, { duration: 250, easing: 'ease-in-out' }).onfinish = done;
+        return;
+      }
+      to.animate({ clipPath: [fromLeft ? 'inset(0 100% 0 0)' : 'inset(0 0 0 100%)', 'inset(0 0 0 0)'] },
+        { duration: 500, easing: 'cubic-bezier(1, 0, 0, 1)' }).onfinish = done;
+      var rise = to.querySelectorAll('.in > *');
+      for (var k = 0; k < rise.length; k++) {
+        rise[k].animate({ opacity: [0, 1], clipPath: ['inset(0 0 100% 0)', 'inset(0 0 0 0)'], transform: ['translateY(100%)', 'translateY(0)'] },
+          { duration: 450, delay: 500 + 100 * k, easing: 'cubic-bezier(0.5, 0.06, 0.01, 0.99)', fill: 'backwards' });
+      }
+    };
+    nav.hidden = false;
+    run(0);
+    nav.addEventListener('animationend', function (e) {
+      if (e.target.parentNode === bars[cur]) go((cur + 1) % slides.length, false);
+    });
+    Array.prototype.forEach.call(bars, function (b, k) { b.addEventListener('click', function () { go(k, false); }); });
+    var x0 = null, y0 = 0;
+    show.addEventListener('touchstart', function (e) {
+      if (e.touches.length === 1) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; } else { x0 = null; }
+    }, { passive: true });
+    show.addEventListener('touchend', function (e) {
+      if (x0 === null) return;
+      var t = e.changedTouches[0], dx = t.clientX - x0, dy = t.clientY - y0;
+      x0 = null;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > 1.5 * Math.abs(dy)) go((cur + (dx < 0 ? 1 : slides.length - 1)) % slides.length, dx > 0);
+    }, { passive: true });
+    show.addEventListener('focusin', function (e) {
+      var keys = true;
+      try { keys = e.target.matches(':focus-visible'); } catch (err) { /* older browsers: hold on any focus */ }
+      hold('focus', keys);
+    });
+    show.addEventListener('focusout', function (e) { if (!show.contains(e.relatedTarget)) hold('focus', false); });
+    document.addEventListener('visibilitychange', function () { hold('tab', document.hidden); });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (en) { hold('away', !en[en.length - 1].isIntersecting); }).observe(show);
+    }
   }
 })();
