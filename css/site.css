@@ -114,8 +114,16 @@ input::placeholder{color:var(--placeholder)}
 .drawer-head::after{content:"";position:absolute;left:0;top:100%;width:100%;height:24px;background:linear-gradient(var(--bg),rgba(250,249,246,0));pointer-events:none;z-index:1}
 .drawer-close{display:flex;align-items:center;justify-content:center;width:44px;height:44px;margin:-15px 0 -15px -15px;padding:0;background:none;border:0;color:var(--ink);cursor:pointer}
 .drawer-list{list-style:none;margin:0;padding:0 var(--gutter) 24px;overflow:hidden auto;flex:1 1 auto}
-.drawer-list li:not(:last-child){border-bottom:1px solid rgba(40,40,40,.15)}
+.drawer-list>li:not(:last-child){border-bottom:1px solid rgba(40,40,40,.15)}
 .drawer-list a{display:flex;justify-content:space-between;align-items:center;width:100%;padding:21px 0}
+/* Learn opens to its two pages (Paul, 11-09: "a nested menu … Nature Portal … Teacher Tools") */
+.drawer-more>summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:21px 0}
+.drawer-more>summary::-webkit-details-marker{display:none}
+.drawer-more>summary::after{content:"+";font-family:var(--sans);font-weight:400;font-size:28px;line-height:1;color:#4F6D3D}
+.drawer-more[open]>summary::after{content:"\2212"}
+.drawer-more>summary:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+.drawer-sub{list-style:none;margin:-10px 0 0;padding:0 0 14px 18px}
+.drawer-sub a{padding:10px 0;font-size:18px;font-weight:600;line-height:1.3}
 body.menu-open{overflow:hidden}
 
 /* hero: the boards' heights — 520px on the 390 phone board (133vw), 760px on the 1440 desktop board — under the solid header */
@@ -240,13 +248,12 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
    each game inside opening to its own words from the Guidebook; the Guidebooks beside the list on desktop */
 .sec>.htp-wrap{width:100%;max-width:1200px;display:flex;flex-direction:column;gap:48px;text-align:left}
 @media (min-width:1000px){.sec>.htp-wrap{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:96px;align-items:start}}
-@media (min-width:1200px){.sec>.htp-wrap{grid-template-columns:minmax(0,1fr) 340px}}   /* room for "Guidebooks" at the 54px section title (322px measured) */
 .grps{border-top:1px solid var(--line)}
 .grp{border-bottom:1px solid var(--line)}
 .grp>summary,.game>summary{list-style:none;cursor:pointer;position:relative}
 .grp>summary::-webkit-details-marker,.game>summary::-webkit-details-marker{display:none}
 .grp>summary{display:flex;flex-direction:column;gap:6px;padding:22px 48px 22px 0}
-.grp-name{margin:0;font-size:min(var(--h2),calc((100vw - 96px) / 7.8))}   /* each group is a section: the section title, as the front door (audit, Paul 11-09) */
+.grp-name{margin:0;font-size:min(var(--h3),calc((100vw - 96px) / 7.8));letter-spacing:-.016em}   /* the h3 size, one step under the section title (Paul 11-09: the h2 size was "too large") */
 .grp-line{line-height:1.45;color:var(--ink-2)}
 .grp>summary::after,.game>summary::before{content:"+";position:absolute;font-weight:400;line-height:1;color:#4F6D3D}
 .grp>summary::after{right:6px;top:50%;transform:translateY(-50%);font-size:32px}
@@ -268,7 +275,34 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 .rules ol,.rules ul{margin:0 0 10px;padding-left:22px;display:flex;flex-direction:column;gap:6px}
 .rules .facts{list-style:none;padding-left:0;gap:2px}
 .rules .to-book{margin-top:12px}
+/* /how-to-play, under the hero (Paul, 11-09): a few Photo Cards as if laid out on a table, Original and Nature mixed,
+   then "Connect with Creativity". Six cards in two rows on a phone, nine from 741px; sizes in cqi of the spread */
+.spread{position:relative;width:100%;max-width:1040px;aspect-ratio:3/2;container-type:inline-size;margin-bottom:12px}
+.spread .card{position:absolute;width:31cqi;padding:1.52cqi;box-shadow:0 6px 18px rgba(40,40,40,.14)}
+.spread .card img{height:auto;aspect-ratio:1/1}
+.spread .card:nth-child(1){left:0;top:3cqi;transform:rotate(-8deg)}
+.spread .card:nth-child(2){left:33cqi;top:0;transform:rotate(5deg)}
+.spread .card:nth-child(3){left:66cqi;top:4cqi;transform:rotate(-5deg)}
+.spread .card:nth-child(4){left:3cqi;top:33cqi;transform:rotate(7deg)}
+.spread .card:nth-child(5){left:35cqi;top:30cqi;transform:rotate(-6deg)}
+.spread .card:nth-child(6){left:67cqi;top:34cqi;transform:rotate(9deg)}
+.spread .card:nth-child(n+7){display:none}
+@media (min-width:741px){
+  .spread{aspect-ratio:10/3;margin-bottom:24px}
+  .spread .card{width:15cqi;padding:.735cqi}
+  .spread .card:nth-child(n+7){display:block}
+  .spread .card:nth-child(1){left:.5cqi;top:9cqi;transform:rotate(-9deg)}
+  .spread .card:nth-child(2){left:11cqi;top:1cqi;transform:rotate(6deg)}
+  .spread .card:nth-child(3){left:22cqi;top:13cqi;transform:rotate(-4deg)}
+  .spread .card:nth-child(4){left:33.5cqi;top:2.5cqi;transform:rotate(10deg)}
+  .spread .card:nth-child(5){left:43.5cqi;top:12cqi;transform:rotate(-7deg)}
+  .spread .card:nth-child(6){left:54cqi;top:.5cqi;transform:rotate(-3deg)}
+  .spread .card:nth-child(7){left:64.5cqi;top:13.5cqi;transform:rotate(8deg)}
+  .spread .card:nth-child(8){left:74.5cqi;top:2cqi;transform:rotate(-10deg)}
+  .spread .card:nth-child(9){left:84.5cqi;top:11.5cqi;transform:rotate(5deg)}
+}
 .htp-books{display:flex;flex-direction:column;gap:20px}
+.htp-books h2{font-size:var(--h3);letter-spacing:-.016em}   /* as the groups beside it (Paul 11-09) */
 .books{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;max-width:420px}
 .book{display:flex;flex-direction:column;gap:10px;min-width:0;text-align:center;container-type:inline-size}   /* titles and languages centred under the covers (Paul, 11-06) */
 .book .cover{display:block;width:100%;height:auto;border-radius:5px;background:#fff;box-shadow:0 2px 6px rgba(40,40,40,.08),0 10px 24px rgba(40,40,40,.12)}
@@ -293,6 +327,10 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 @media (min-width:741px){.pairs{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media (min-width:1000px){.pairs{grid-template-columns:repeat(6,minmax(0,1fr));gap:32px 22px}}
 .sec>.pairs{max-width:1200px}
+/* a section title or intro straight over a grid of cards or portraits gets 32px on a phone, 48px from 741px, where the
+   site's 20/24px gap stays between a title and its words (Paul, 11-09: "check spacing between title and cards") */
+.sec>h2+.pairs,.sec>h2+.tiles,.sec>h2+.photogs,.sec>.narrow+.photogs{margin-top:12px}
+@media (min-width:741px){.sec>h2+.pairs,.sec>h2+.tiles,.sec>h2+.photogs,.sec>.narrow+.photogs{margin-top:24px}}
 .pairs li{display:flex;flex-direction:column;gap:6px;text-align:left;min-width:0}
 .pairs .card{position:relative;display:block}
 .pairs .card .face{position:absolute;right:8px;bottom:8px;width:44px;height:44px;border-radius:50%;object-fit:cover;border:3px solid var(--cream)}
@@ -302,7 +340,7 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 /* Paul, 11-06: "All 210 Nature cards" right under the cards, six cards on phones, then the line, then the photographers */
 @media (max-width:740px){.pairs li:nth-child(n+7){display:none}}
 /* /learn, our photographers (Paul, 11-09): all sixteen portraits, each to their profile; 4 by 4 on a phone, 8 by 2 from 741px */
-.photogs{list-style:none;margin:8px 0 4px;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;width:100%;max-width:480px}
+.photogs{list-style:none;margin:0 0 4px;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;width:100%;max-width:480px}
 @media (min-width:741px){.sec>.photogs{grid-template-columns:repeat(8,minmax(0,1fr));gap:20px;max-width:1040px}}
 .photogs a{display:block;border-radius:50%}
 .photogs img{display:block;width:100%;height:auto;aspect-ratio:1/1;border-radius:50%;object-fit:cover;box-shadow:0 0 0 1px var(--line)}   /* the ring: Daniel Beltrá's white background had no edge */
