@@ -137,6 +137,7 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 .hero .ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .hero .ph2{display:none}
 .hero .veil{position:absolute;inset:0;background:rgba(0,0,0,.38)}
+.hero.dim .veil{background:rgba(0,0,0,.55)}   /* Teacher Tools (Paul, 11-09): the chain's white card borders sit behind the words; .38 measured 2.7:1, .55 4.7:1 */
 .hero .in{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:40px var(--gutter)}
 .hdr[data-transparent] ~ main > .hero:first-child .in{padding-top:calc(var(--hdr-h) + 32px)}
 .hero h1,.hero .t{color:#fff;max-width:900px;font-size:min(var(--h1),11vw)}   /* fits the narrowest phones (320px) without breaking a joined pair */
