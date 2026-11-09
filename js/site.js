@@ -9,6 +9,8 @@
     var veil = drawer.querySelector('.drawer-overlay');
     var isOpen = function () { return drawer.classList.contains('open'); };
     var open = function () {
+      // every submenu starts closed, its + showing, each time the menu opens (Paul, 11-09)
+      drawer.querySelectorAll('.drawer-more').forEach(function (d) { d.open = false; });
       drawer.classList.add('open');
       drawer.setAttribute('aria-hidden', 'false');
       btn.setAttribute('aria-expanded', 'true');
@@ -22,9 +24,6 @@
       document.body.classList.remove('menu-open');
       btn.focus();
     };
-    // on a Learn page, the menu opens with Learn's two pages showing
-    var more = drawer.querySelector('.drawer-more[data-path]');
-    if (more && location.pathname.indexOf(more.getAttribute('data-path')) > -1) more.open = true;
     btn.addEventListener('click', function () { if (isOpen()) { close(); } else { open(); } });
     if (closeBtn) closeBtn.addEventListener('click', close);
     if (veil) veil.addEventListener('click', close);
