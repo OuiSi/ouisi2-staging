@@ -292,7 +292,7 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 .pairs{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 16px;width:100%}
 @media (min-width:741px){.pairs{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media (min-width:1000px){.pairs{grid-template-columns:repeat(6,minmax(0,1fr));gap:32px 22px}}
-.sec>.pairs,.sec>.pairs-foot{max-width:1200px}
+.sec>.pairs{max-width:1200px}
 .pairs li{display:flex;flex-direction:column;gap:6px;text-align:left;min-width:0}
 .pairs .card{position:relative;display:block}
 .pairs .card .face{position:absolute;right:8px;bottom:8px;width:44px;height:44px;border-radius:50%;object-fit:cover;border:3px solid var(--cream)}
@@ -301,10 +301,11 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 .pairs .by{font-size:13px;color:var(--ink-2);text-decoration:underline;text-underline-offset:3px}
 /* Paul, 11-06: "All 210 Nature cards" right under the cards, six cards on phones, then the line, then the photographers */
 @media (max-width:740px){.pairs li:nth-child(n+7){display:none}}
-.pairs-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px 24px;width:100%;margin-top:12px;padding-top:28px;border-top:1px solid var(--line)}
-.faces{display:flex;margin:0;padding-right:10px}
-.faces a{margin-right:-10px}
-.faces img{display:block;width:44px;height:44px;border-radius:50%;object-fit:cover;border:3px solid var(--cream)}
+/* /learn, our photographers (Paul, 11-09): all sixteen portraits, each to their profile; 4 by 4 on a phone, 8 by 2 from 741px */
+.photogs{list-style:none;margin:8px 0 4px;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;width:100%;max-width:480px}
+@media (min-width:741px){.sec>.photogs{grid-template-columns:repeat(8,minmax(0,1fr));gap:20px;max-width:1040px}}
+.photogs a{display:block;border-radius:50%}
+.photogs img{display:block;width:100%;height:auto;aspect-ratio:1/1;border-radius:50%;object-fit:cover;box-shadow:0 0 0 1px var(--line)}   /* the ring: Daniel Beltrá's white background had no edge */
 .grp>summary:focus-visible,.game>summary:focus-visible{outline:2px solid var(--green);outline-offset:2px}
 .join{min-height:60vh}
 .join .btn[hidden]{display:none}
