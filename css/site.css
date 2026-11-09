@@ -240,38 +240,39 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
    each game inside opening to its own words from the Guidebook; the Guidebooks beside the list on desktop */
 .sec>.htp-wrap{width:100%;max-width:1200px;display:flex;flex-direction:column;gap:48px;text-align:left}
 @media (min-width:1000px){.sec>.htp-wrap{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:96px;align-items:start}}
+@media (min-width:1200px){.sec>.htp-wrap{grid-template-columns:minmax(0,1fr) 340px}}   /* room for "Guidebooks" at the 54px section title (322px measured) */
 .grps{border-top:1px solid var(--line)}
 .grp{border-bottom:1px solid var(--line)}
 .grp>summary,.game>summary{list-style:none;cursor:pointer;position:relative}
 .grp>summary::-webkit-details-marker,.game>summary::-webkit-details-marker{display:none}
-.grp>summary{display:flex;flex-direction:column;gap:2px;padding:18px 48px 18px 0}
-.grp-name{font-family:var(--display);font-weight:700;font-size:24px;line-height:1.2}
-.grp-line{font-size:15px;line-height:1.4;color:var(--ink-2)}
+.grp>summary{display:flex;flex-direction:column;gap:6px;padding:22px 48px 22px 0}
+.grp-name{margin:0;font-size:min(var(--h2),calc((100vw - 96px) / 7.8))}   /* each group is a section: the section title, as the front door (audit, Paul 11-09) */
+.grp-line{line-height:1.45;color:var(--ink-2)}
 .grp>summary::after,.game>summary::before{content:"+";position:absolute;font-weight:400;line-height:1;color:#4F6D3D}
 .grp>summary::after{right:6px;top:50%;transform:translateY(-50%);font-size:32px}
 .grp[open]>summary::after,.game[open]>summary::before{content:"\2212"}
 .grp-body{padding:0 0 24px}
-.grp-intro{margin:0 0 14px;font-size:16px;line-height:1.6;color:var(--ink-2);max-width:42em}
+.grp-intro{margin:0 0 14px;color:var(--ink-2);max-width:42em}
 .games{list-style:none;margin:0;padding:0}
 .games>li{position:relative;border-top:1px solid var(--line)}
 .game>summary{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 12px;padding:14px 76px 14px 28px;min-height:48px;box-sizing:border-box}
 .game>summary::before{left:2px;top:15px;font-size:24px}
-.gname{font-family:var(--display);font-weight:700;font-size:19px;line-height:1.3}
-.gsets{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ink-2)}
+.gname{margin:0;font-size:var(--h5);letter-spacing:-.3px;line-height:1.2}   /* the card title, as the front door's */
+.gsets{font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ink-2)}
 .games .watch{position:absolute;right:0;top:18px}
-.rules{padding:0 0 20px 28px;font-size:16px;line-height:1.6;max-width:44em}
+.rules{padding:0 0 20px 28px;max-width:44em}   /* body size, as every page */
+@media (max-width:300px){.rules{font-size:16px}}   /* 240px: a joined last pair ("wonderful imagination!") ran 9px past the edge at 17px */
 .rules.flat{padding-left:0}
 .rules p{margin:0 0 10px}
-.rules h4{margin:14px 0 6px;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+.rules h4{margin:14px 0 6px;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
 .rules ol,.rules ul{margin:0 0 10px;padding-left:22px;display:flex;flex-direction:column;gap:6px}
 .rules .facts{list-style:none;padding-left:0;gap:2px}
 .rules .to-book{margin-top:12px}
 .htp-books{display:flex;flex-direction:column;gap:20px}
-.htp-books h2{font-size:28px;letter-spacing:-.5px}
 .books{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;max-width:420px}
-.book{display:flex;flex-direction:column;gap:10px;min-width:0;text-align:center}   /* titles and languages centred under the covers (Paul, 11-06) */
+.book{display:flex;flex-direction:column;gap:10px;min-width:0;text-align:center;container-type:inline-size}   /* titles and languages centred under the covers (Paul, 11-06) */
 .book .cover{display:block;width:100%;height:auto;border-radius:5px;background:#fff;box-shadow:0 2px 6px rgba(40,40,40,.08),0 10px 24px rgba(40,40,40,.12)}
-.book .h5{font-size:17px}
+.book .h5{font-size:min(var(--h5),13.6cqi)}   /* the card title, one line under each cover (as the tiles' titles) */
 .langs{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px;font-size:15px}   /* one language per line: never one left alone */
 .langs a{text-decoration:underline;text-underline-offset:3px}
 /* /learn (Paul, 11-05: canvas "D · Each photographer with their card"): the lookup, then twelve cards, each with what
