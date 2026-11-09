@@ -116,7 +116,7 @@ input::placeholder{color:var(--placeholder)}
 .drawer-list{list-style:none;margin:0;padding:0 var(--gutter) 24px;overflow:hidden auto;flex:1 1 auto}
 .drawer-list>li:not(:last-child){border-bottom:1px solid rgba(40,40,40,.15)}
 .drawer-list a{display:flex;justify-content:space-between;align-items:center;width:100%;padding:21px 0}
-/* Learn opens to its two pages (Paul, 11-09: "a nested menu … Nature Portal … Teacher Tools") */
+/* Shop, Learn and Where it's played open to their pages (Paul, 11-09: nested only where each link lands on a page of its own) */
 .drawer-more>summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:21px 0}
 .drawer-more>summary::-webkit-details-marker{display:none}
 .drawer-more>summary::after{content:"+";font-family:var(--sans);font-weight:400;font-size:28px;line-height:1;color:#4F6D3D}

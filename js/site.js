@@ -23,8 +23,8 @@
       btn.focus();
     };
     // on a Learn page, the menu opens with Learn's two pages showing
-    var more = drawer.querySelector('.drawer-more');
-    if (more && /\/learn\//.test(location.pathname)) more.open = true;
+    var more = drawer.querySelector('.drawer-more[data-path]');
+    if (more && location.pathname.indexOf(more.getAttribute('data-path')) > -1) more.open = true;
     btn.addEventListener('click', function () { if (isOpen()) { close(); } else { open(); } });
     if (closeBtn) closeBtn.addEventListener('click', close);
     if (veil) veil.addEventListener('click', close);
