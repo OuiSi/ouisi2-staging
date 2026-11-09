@@ -35,3 +35,12 @@
 #
 # The store's own URL Redirects (Shopify admin → Content → Menus → URL redirects) are deliberately NOT carried
 # here: Paul, 11-03, "i want to clean up this list, not use them".
+#
+# Learn becomes the hub (Paul, 11-09: "Yes, move them"): the Nature Portal moves down a level, its card and
+# photographer pages under it, Teacher Tools to /learn/teachers. The old addresses forward, for good.
+/learn/nature-cards/136               /learn/nature/cards/136/                                 301
+/learn/nature-photographers/lenz-lim  /learn/nature/photographers/lenz-lim/                    301
+/learn/teacher-tools                  /learn/teachers/                                         301
+# No dead levels: the collections forward to the portal's own pages until they are built here.
+/learn/nature/cards                   https://go.ouisi.co/photo-cards                          302
+/learn/nature/photographers           https://go.ouisi.co/photographers/                       302
