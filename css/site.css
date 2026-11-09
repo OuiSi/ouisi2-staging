@@ -343,6 +343,79 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 .twosets .subj{font-weight:600}
 .twosets .by{font-size:13px;color:var(--ink-2);text-decoration:underline;text-underline-offset:3px}
 @media (min-width:741px){.twosets{max-width:460px;gap:14px 22px}}
+/* the Nature card and photographer pages (Paul, 11-09: canvas 6Mj9FTbUh1XVdya9E6b8Z3; /learn/nature-cards/N/,
+   /learn/nature-photographers/<name>/): the portal's content and order, the site's look */
+.nc-top,.np-top{padding-top:48px}
+.sec>.nc-grid,.sec>.np-grid{width:100%;display:flex;flex-direction:column;align-items:center;gap:32px}
+.nc-head,.np-head{display:flex;flex-direction:column;align-items:center;width:100%;max-width:640px}
+.nc-head h1,.np-head h1{margin-top:12px}
+.sci{margin:10px 0 0;font-size:17px;font-style:italic;line-height:1.4;color:var(--ink-2)}
+.tag{margin:10px 0 0;font-size:18px;font-style:italic;line-height:1.4;color:var(--ink-2)}
+.lab,.facts dt{font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;line-height:1.5;color:var(--ink-2)}
+.nc-pair{margin:0;display:grid;grid-template-columns:44fr 56fr;gap:16px;align-items:center;width:100%;max-width:460px}
+.nc-pair .card{display:block;box-shadow:0 6px 18px rgba(40,40,40,.14)}
+.nc-pair .card img{height:auto;aspect-ratio:1/1}
+.nc-pair .full,.nc-pair .full img{display:block;width:100%;height:auto;border-radius:10px}
+.nc-pair img.full,.nc-pair button.full{box-shadow:0 6px 18px rgba(40,40,40,.14)}
+.nc-pair.ph-only{margin-top:28px}
+.zoom{position:relative;display:block;width:100%;margin:0;border:0;font:inherit;color:inherit;cursor:zoom-in}
+button.zoom.full{padding:0;background:none}
+.zoom .zm{position:absolute;right:10px;bottom:10px;width:30px;height:30px;border-radius:50%;background:rgba(40,40,40,.62);color:#fff;display:flex;align-items:center;justify-content:center}
+.dt-only{display:none}
+@media (min-width:741px){.nc-pair.ph-only{display:none}.nc-pair.dt-only{display:grid}}   /* full screen is phone only (Paul, 11-09) */
+.facts{margin:28px 0 0;width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 16px;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-align:left}
+.facts dd{margin:6px 0 0;font-size:17px;font-weight:500;overflow-wrap:anywhere}
+.facts dd a{font-weight:400;text-decoration:underline;text-underline-offset:3px}
+.credit{margin-top:24px;display:flex;align-items:center;gap:14px;text-align:left}
+.credit img{width:52px;height:52px;border-radius:50%;object-fit:cover}
+.credit>span{display:flex;flex-direction:column;gap:2px}
+.by-lab{font-size:14px;color:var(--ink-2)}
+.credit a{font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.sec>.nc-text{width:100%;max-width:760px;text-align:left}
+.nc-text h2{font-size:var(--h3);letter-spacing:-.016em}
+.nc-text p{margin:18px 0 0}
+.nc-links{margin-top:28px;padding-top:20px;border-top:1px solid var(--line);display:grid;gap:20px}
+.nc-links>div{display:flex;flex-direction:column;gap:6px}
+.nc-links a{text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+.nc-photog .portrait{width:128px;height:128px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 1px var(--line)}
+.np-portrait{width:200px;height:200px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 1px var(--line)}
+.np-bio{width:100%;margin-top:28px;text-align:left}
+.np-bio p{margin:0}
+.np-bio p+p{margin-top:10px}
+.pairs .no{margin:0;font-size:13px;color:var(--ink-2)}
+.pairs .subj.fam{margin-top:0}   /* a family name in brackets on its own line: "Beetle (Tenebrionidae)" joined is wider than a phone's card */
+@media (max-width:740px){.pairs.all li:nth-child(n+7){display:flex}}   /* every one of the photographer's cards, on a phone too */
+.np-links{display:flex;flex-wrap:wrap;justify-content:center;gap:16px 40px}
+@media (min-width:741px){
+  .nc-links{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px}
+  .nc-photog .portrait{width:150px;height:150px}   /* the 300 px portrait stays sharp at 2x */
+  .tag{font-size:22px}
+}
+@media (min-width:1000px){
+  .sec>.nc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:80px;align-items:center;max-width:1200px}
+  .sec>.np-grid{display:grid;grid-template-columns:320px minmax(0,1fr);gap:96px;align-items:center;max-width:1200px}
+  .nc-head,.np-head{align-items:flex-start;text-align:left}
+  .nc-pair.dt-only{max-width:560px;gap:24px}
+  .np-portrait{width:240px;height:240px;justify-self:center}
+}
+/* the phone's full-screen view of the card and its whole photo */
+.viewer{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:#111;color:#fff;overflow:hidden}
+.viewer::backdrop{background:#111}
+.viewer[open]{display:flex;flex-direction:column}
+.v-close{align-self:flex-end;flex-shrink:0;width:44px;height:44px;margin:8px 12px 0 0;padding:0;border:0;background:none;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.v-stage{flex:1 1 auto;min-height:0;padding:0 16px;display:flex;align-items:center;justify-content:center}
+.v-card{width:100%;box-sizing:border-box}
+.v-card img{height:auto;aspect-ratio:1/1}
+.v-photo{display:block;max-width:100%;max-height:100%;width:auto;height:auto;border-radius:6px}
+.viewer[data-view=card] .v-photo,.viewer[data-view=photo] .v-card{display:none}
+.v-cap{flex-shrink:0;padding:18px 24px 28px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.v-subj{margin:0;font-size:15px;font-weight:600}
+.v-by{margin:0;font-size:14px;color:#BDBDB7}
+.v-bars{display:flex;justify-content:center;margin-top:6px}
+.v-bars button{width:64px;margin:0 8px;padding:18px 0;border:0;background:none;cursor:pointer}
+.v-bars span{display:block;height:2px;background:rgba(255,255,255,.4)}
+.v-bars [aria-current=true] span{background:#fff}
+.viewer button:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .pairs{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 16px;width:100%}
 @media (min-width:741px){.pairs{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media (min-width:1000px){.pairs{grid-template-columns:repeat(6,minmax(0,1fr));gap:32px 22px}}

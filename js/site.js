@@ -1,4 +1,4 @@
-/* ouisi.co — the menu drawer, the header over the hero, the Nature card lookup, the front door slideshow. No dependencies. */
+/* ouisi.co — the menu drawer, the header over the hero, the Nature card lookup, the front door slideshow, the card pages' full-screen view. No dependencies. */
 (function () {
   // Menu: the shop's drawer, from the left. Escape, the veil and the close button all shut it;
   // focus stays inside while it is open and returns to the menu button after.
@@ -147,5 +147,20 @@
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (en) { hold('away', !en[en.length - 1].isIntersecting); }).observe(show);
     }
+  }
+  // Nature card pages, phone: the card and its whole photo open full screen (Paul, 11-09). Escape, the close
+  // button and a tap beside the picture shut it; the two bars switch between card and photo.
+  var viewer = document.querySelector('dialog.viewer');
+  if (viewer && typeof viewer.showModal === 'function') {
+    var bars = viewer.querySelectorAll('.v-bars button');
+    var view = function (v) {
+      viewer.setAttribute('data-view', v);
+      for (var i = 0; i < bars.length; i++) bars[i].setAttribute('aria-current', bars[i].getAttribute('data-view') === v ? 'true' : 'false');
+    };
+    var zooms = document.querySelectorAll('.zoom');
+    for (var z = 0; z < zooms.length; z++) zooms[z].addEventListener('click', function (e) { view(e.currentTarget.getAttribute('data-view')); viewer.showModal(); });
+    for (var b = 0; b < bars.length; b++) bars[b].addEventListener('click', function (e) { view(e.currentTarget.getAttribute('data-view')); });
+    viewer.querySelector('.v-close').addEventListener('click', function () { viewer.close(); });
+    viewer.addEventListener('click', function (e) { if (e.target === viewer || e.target.classList.contains('v-stage')) viewer.close(); });
   }
 })();
