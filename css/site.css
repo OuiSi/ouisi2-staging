@@ -343,9 +343,9 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 .twosets .subj{font-weight:600}
 .twosets .by{font-size:13px;color:var(--ink-2);text-decoration:underline;text-underline-offset:3px}
 @media (min-width:741px){.twosets{max-width:460px;gap:14px 22px}}
-/* /learn, the hub (Paul, 11-09: "Yes, move them"; drawn 11-05): one door per portal, the third (dementia care) to come */
+/* /learn, the hub (Paul, 11-09: "Yes, move them"; drawn 11-05): one door per portal — Nature, Teachers, Memory care */
 .sec>.doors{width:100%;max-width:1200px;display:grid;grid-template-columns:minmax(0,1fr);gap:48px}
-@media (min-width:741px){.sec>.doors{grid-template-columns:repeat(2,minmax(0,1fr));gap:40px}}
+@media (min-width:741px){.sec>.doors{grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}}
 .door{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;min-width:0}
 .door .pic{display:block;width:100%}
 .door .pic img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:12px}
