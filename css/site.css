@@ -362,20 +362,26 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 .sci{margin:10px 0 0;font-size:17px;font-style:italic;line-height:1.4;color:var(--ink-2)}
 .tag{--tag:18px;margin:10px 0 0;font-size:min(var(--tag),calc(100cqi / var(--fit,1)));font-style:italic;line-height:1.4;color:var(--ink-2)}
 .lab,.facts dt{font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;line-height:1.5;color:var(--ink-2)}
-/* The whole photo leads, the card over its corner (Paul, 11-10: "the ACTUAL full photo is more important"). A landscape
-   photo takes the full width; a portrait one is held to a height. --w/--h: the photo's own size, from the build. */
-.nc-pair{margin:0 0 18px;position:relative;width:100%;max-width:460px}
-.nc-pair.port{width:min(100%,calc(440px * var(--w) / var(--h)))}
-.nc-pair .card{position:absolute;left:-8px;bottom:-18px;z-index:1;display:block;width:34%;max-width:170px;box-shadow:0 6px 18px rgba(40,40,40,.25)}
-.nc-pair .card img{height:auto;aspect-ratio:1/1}
+/* The card and the whole photo side by side, centred on each other, the card 60% of the photo's height, nothing
+   overlapping; a phone stacks a landscape photo full width under the card (Paul, 11-10, canvas Mg4ZRzm8MiSatBN98ySXU5).
+   --ar: the photo's width / height, from the build. */
+.nc-pair{margin:0;display:flex;align-items:center;gap:12px;width:100%;max-width:460px}
+.nc-pair .card{flex:.6 1 0;min-width:0;padding:0;box-shadow:0 6px 18px rgba(40,40,40,.14)}
+.nc-pair .card img{display:block;width:90.2%;height:auto;aspect-ratio:1/1;margin:4.9%}   /* the white frame: 4.9% of the card's own width (a padding % takes the width of the box around the card) */
+.nc-pair .full{flex:var(--ar) 1 0;min-width:0}
 .nc-pair .full,.nc-pair .full img{display:block;width:100%;height:auto;border-radius:10px}
 .nc-pair img.full,.nc-pair button.full{box-shadow:0 6px 18px rgba(40,40,40,.14)}
+@media (max-width:740px){   /* a phone: a landscape photo goes full width, the card above it at 60% of its height */
+  .nc-pair.land{flex-direction:column;gap:16px;max-width:none}
+  .nc-pair.land .card{flex:none;width:calc(60% / var(--ar))}
+  .nc-pair.land .full{flex:none;width:100%}
+}
 .nc-pair.ph-only{margin-top:28px}
 .zoom{position:relative;display:block;width:100%;margin:0;border:0;font:inherit;color:inherit;cursor:zoom-in}
 button.zoom.full{padding:0;background:none}
 .zoom .zm{position:absolute;right:10px;bottom:10px;width:30px;height:30px;border-radius:50%;background:rgba(40,40,40,.62);color:#fff;display:flex;align-items:center;justify-content:center}
 .dt-only{display:none}
-@media (min-width:741px){.nc-pair.ph-only{display:none}.nc-pair.dt-only{display:block}}   /* full screen is phone only (Paul, 11-09) */
+@media (min-width:741px){.nc-pair.ph-only{display:none}.nc-pair.dt-only{display:flex}}   /* full screen is phone only (Paul, 11-09) */
 .facts{margin:28px 0 0;width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 16px;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-align:left}
 .facts dd{margin:6px 0 0;font-size:17px;font-weight:500;overflow-wrap:anywhere}
 .facts>div:only-child{grid-column:1 / -1}   /* a card with no date: its location takes the whole row (card 21, 11-10) */
@@ -410,8 +416,7 @@ button.zoom.full{padding:0;background:none}
   .sec>.np-grid{display:grid;grid-template-columns:320px minmax(0,1fr);gap:96px;align-items:center;max-width:1200px}
   .nc-head,.np-head{align-items:flex-start;text-align:left}
   .sec>.nc-grid.land{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:64px}   /* a landscape photo gets the wider column */
-  .nc-pair.dt-only{max-width:640px}
-  .nc-pair.dt-only.port{width:min(100%,calc(540px * var(--w) / var(--h)))}
+  .nc-pair.dt-only{max-width:640px;gap:24px}
   .np-portrait{width:240px;height:240px;justify-self:center}
 }
 /* the phone's full-screen view of the card and its whole photo */
