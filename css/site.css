@@ -357,7 +357,7 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 .nc-top,.np-top{padding-top:48px}
 .sec>.nc-grid,.sec>.np-grid{width:100%;display:flex;flex-direction:column;align-items:center;gap:32px}
 .nc-head,.np-head{display:flex;flex-direction:column;align-items:center;width:100%;max-width:640px}
-.nc-head h1,.np-head h1{margin-top:12px}
+.nc-head h1,.np-head h1{margin-top:12px;font-size:min(var(--h1),11vw)}   /* as the heroes: a joined last pair ("Fern Fiddlehead") fits a 310px screen (11-10) */
 .sci{margin:10px 0 0;font-size:17px;font-style:italic;line-height:1.4;color:var(--ink-2)}
 .tag{margin:10px 0 0;font-size:18px;font-style:italic;line-height:1.4;color:var(--ink-2)}
 .lab,.facts dt{font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;line-height:1.5;color:var(--ink-2)}
