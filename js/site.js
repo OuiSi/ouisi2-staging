@@ -153,12 +153,26 @@
   var viewer = document.querySelector('dialog.viewer');
   if (viewer && typeof viewer.showModal === 'function') {
     var bars = viewer.querySelectorAll('.v-bars button');
+    var photo = viewer.querySelector('.v-photo'), stage = viewer.querySelector('.v-stage');
+    // Long side against long side (Paul, 11-10): when the photo's shape doesn't match how the phone is held, it turns a
+    // quarter and fills the screen; turn the phone and it stands upright at full size.
+    var fit = function () {
+      if (!photo || !stage) return;
+      photo.classList.remove('rot'); photo.style.width = '';
+      if (viewer.getAttribute('data-view') !== 'photo' || !photo.naturalWidth) return;
+      var cs = getComputedStyle(stage), ar = photo.naturalWidth / photo.naturalHeight;
+      var W = stage.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight), H = stage.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+      if ((ar > 1) === (H > W)) { photo.style.width = Math.floor(Math.min(H, W * ar)) + 'px'; photo.classList.add('rot'); }
+    };
     var view = function (v) {
       viewer.setAttribute('data-view', v);
       for (var i = 0; i < bars.length; i++) bars[i].setAttribute('aria-current', bars[i].getAttribute('data-view') === v ? 'true' : 'false');
+      fit();
     };
+    if (photo) photo.addEventListener('load', fit);
+    window.addEventListener('resize', function () { if (viewer.open) fit(); });
     var zooms = document.querySelectorAll('.zoom');
-    for (var z = 0; z < zooms.length; z++) zooms[z].addEventListener('click', function (e) { view(e.currentTarget.getAttribute('data-view')); viewer.showModal(); });
+    for (var z = 0; z < zooms.length; z++) zooms[z].addEventListener('click', function (e) { viewer.showModal(); view(e.currentTarget.getAttribute('data-view')); });
     for (var b = 0; b < bars.length; b++) bars[b].addEventListener('click', function (e) { view(e.currentTarget.getAttribute('data-view')); });
     viewer.querySelector('.v-close').addEventListener('click', function () { viewer.close(); });
     viewer.addEventListener('click', function (e) { if (e.target === viewer || e.target.classList.contains('v-stage')) viewer.close(); });
