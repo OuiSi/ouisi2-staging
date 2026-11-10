@@ -227,7 +227,8 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 .ftr .colf p.links{line-height:2.4}
 .ftr .links{display:grid;grid-template-rows:repeat(4,auto);grid-auto-flow:column;grid-auto-columns:minmax(max-content,1fr);column-gap:24px}
 @media (max-width:300px){.ftr .links{grid-auto-columns:minmax(0,1fr);column-gap:16px}}   /* and the menu may wrap there, rather than widen the page */   /* the menu in two columns, 4 + 3, at every size (Paul, 11-03) */
-.ftr .links a{display:block}
+@media (min-width:301px) and (max-width:339px),(min-width:1000px) and (max-width:1099px){.ftr .links{grid-template-columns:minmax(0,1fr) minmax(max-content,1fr)}}   /* where "Learning and care" can't sit on one line beside "Terms of Service", it wraps as Learning / and care (11-10) */
+.ftr .links a{display:block;line-height:1.35;padding:.525em 0}   /* one line: the same 2.4 row as before; a link that wraps keeps its two lines together (11-10) */
 .ftr .links a:hover{text-decoration:underline;text-underline-offset:4px}
 .social{display:grid;grid-template-columns:repeat(5,min(56px,calc((100vw - 2 * var(--gutter) - 2px) / 5)));border:1px solid var(--footer-line);width:max-content}   /* one row of five at every size (Paul, 11-03); shrinks on the narrowest phones */
 .social a{height:56px;display:flex;align-items:center;justify-content:center;border-right:1px solid var(--footer-line)}
@@ -520,6 +521,7 @@ button.zoom.full{padding:0;background:none}
   .ftr .colf{gap:16px}
   .ftr .colf p:not(.eb){font-size:18px;line-height:1.73}
   .ftr .colf p.links{line-height:2.3}
+  .ftr .links a{padding:.475em 0}   /* 1.35 + .95 = the 2.3 row */
   .ftr .fine{width:1360px;max-width:100%;margin:0 auto}
   .legal{padding:72px var(--gutter) 96px}
 }
