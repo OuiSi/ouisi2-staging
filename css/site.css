@@ -603,3 +603,19 @@ button.zoom.full{padding:0;background:none}
 }
 
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.hdr,.drawer,.drawer-overlay,.drawer-panel{transition:none}}
+
+/* The lists of all cards and all photographers (11-10): the hub's card list; for a photographer, a round portrait in
+   place of the card, eight across on desktops as the hub's portraits */
+.nx-list>h1+.pairs{margin-top:32px}
+.pairs .pg{display:block;border-radius:50%}
+.pairs .pg img{display:block;width:100%;height:auto;aspect-ratio:1/1;border-radius:50%;object-fit:cover;box-shadow:0 0 0 1px var(--line)}
+.pairs a.subj{color:inherit;text-decoration:underline;text-underline-offset:3px}
+@media (min-width:1000px){.pairs.people{grid-template-columns:repeat(8,minmax(0,1fr))}}
+/* Their headings and a photographer page's "More from …" keep inside the screen, as the card titles do: the widest
+   piece that can't break (measured, --fit, in em) sets the size, less the heading's own side padding */
+.nx-list,.np-cards{container-type:inline-size}
+.nx-list>h1{font-size:min(var(--h1),11vw,calc((100cqi - 24px) / var(--fit,1)))}
+.np-cards>h2{font-size:min(var(--h2),calc((100cqi - 24px) / var(--fit,1)))}
+/* Below 260 px a bio's joined last pair ("Conservation Photographers.", Daniel Beltrá) is wider than the line: one
+   pixel smaller there, so it fits without a lone last word (11-10) */
+@media (max-width:259px){.np-bio p{font-size:16px}}

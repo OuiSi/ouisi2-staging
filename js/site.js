@@ -60,7 +60,8 @@
     });
   }
 
-  // Nature card lookup: the number on the card -> the same page its QR code opens.
+  // Nature card lookup: the number on the card -> that card's page on ouisi.co (11-10; the printed QR codes still open
+  // go.ouisi.co/2/N). The form's action is the list of all cards, so the card's page sits beside it at N/index.html.
   var form = document.getElementById('lookup');
   if (form) {
     var input = form.querySelector('input');
@@ -69,7 +70,7 @@
       e.preventDefault();
       var n = parseInt((input.value || '').replace(/\D/g, ''), 10);
       if (n >= 1 && n <= 210) {
-        window.location.href = 'https://go.ouisi.co/2/' + n;
+        window.location.href = new URL(n + '/index.html', form.action).href;
       } else {
         if (hint) hint.textContent = 'Nature cards are numbered 1 to 210.';
         input.focus();

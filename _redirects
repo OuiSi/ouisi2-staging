@@ -1,46 +1,5 @@
-# ouisi.co — redirects for Cloudflare Pages, launch 1 (the door).
-# Not active in a local build. Nothing here touches go.ouisi.co or a QR code (SITEMAP-NEW, launch order).
-#
-# Printed paths and the two the runbook names. /original is a store-wide Shopify redirect today
-# (WEB-MIGRATION-RUNBOOK, "the trap") — sending it to the shop keeps the guidebook's URL alive.
-/original            https://shop.ouisi.co/products/connecting-photo-cards            301   # Paul, 11-04: straight to the product page, not via the shop's own /original redirect
-/blog                https://shop.ouisi.co/blogs/how-we-see-a-blog-on-connection      301
-/app                 /apps/                                                           301
-# The app policies moved to one pattern the day after launch (Paul, 11-02: "Why would these be different formats?").
-/apps/privacy        /apps/photologue/privacy/                                        301
-/apps/terms          /apps/photologue/terms/                                          301
-/apps/daily-privacy  /apps/daily/privacy/                                             301
-/apps/daily-terms    /apps/daily/terms/                                               301
-# Each app's own address lands on its section of /apps until there are app pages of their own.
-/apps/daily          /apps/#daily                                                     302
-/apps/photologue     /apps/#photologue                                                302
-#
-# The portal stays on go.ouisi.co until launch 2 — temporary redirects on purpose.
+# ouisi.co — forwarding (GitHub Pages has no server redirects: build.py writes a forwarding page for each rule
+# and a script in 404.html). Only addresses Paul decided are kept (Paul, 11-10: "Yes, remove them", after the
+# rest turned out to be assumptions: shop-era paths, launch-day app addresses, the five-day-old Learn addresses).
+/original            https://shop.ouisi.co/products/connecting-photo-cards            301   # Paul, 11-04: printed in the guidebook; straight to the product page
 /nature              https://shop.ouisi.co/products/ouisi-nature-set                  301   # Paul, 11-02: the product page, like /original
-# /learn is a page of its own from 11-04 (Paul: "Start building").
-#
-# Shopify-era paths: ouisi.co is a connected domain that redirects to shop.ouisi.co today, path kept
-# (that is how ouisi.co/original works). These keep old links landing where they land now.
-/products/*          https://shop.ouisi.co/products/:splat                            301
-/collections/*       https://shop.ouisi.co/collections/:splat                         301
-/pages/*             https://shop.ouisi.co/pages/:splat                               301
-/policies/*          https://shop.ouisi.co/policies/:splat                            301
-/blogs/*             https://shop.ouisi.co/blogs/:splat                               301
-/apps/help-center    https://shop.ouisi.co/apps/help-center                           301
-/apps/enzuzo/*       https://shop.ouisi.co/apps/enzuzo/:splat                         301
-/cart                https://shop.ouisi.co/cart                                       301
-/account             https://shop.ouisi.co/account                                    301
-/account/*           https://shop.ouisi.co/account/:splat                             301
-/search              https://shop.ouisi.co/search                                     301
-#
-# The store's own URL Redirects (Shopify admin → Content → Menus → URL redirects) are deliberately NOT carried
-# here: Paul, 11-03, "i want to clean up this list, not use them".
-#
-# Learn becomes the hub (Paul, 11-09: "Yes, move them"): the Nature Portal moves down a level, its card and
-# photographer pages under it, Teacher Tools to /learn/teachers. The old addresses forward, for good.
-/learn/nature-cards/136               /learn/nature/cards/136/                                 301
-/learn/nature-photographers/lenz-lim  /learn/nature/photographers/lenz-lim/                    301
-/learn/teacher-tools                  /learn/teachers/                                         301
-# No dead levels: the collections forward to the portal's own pages until they are built here.
-/learn/nature/cards                   https://go.ouisi.co/photo-cards                          302
-/learn/nature/photographers           https://go.ouisi.co/photographers/                       302
