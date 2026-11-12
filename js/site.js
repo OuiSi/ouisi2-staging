@@ -1,4 +1,4 @@
-/* ouisi.co — the menu drawer, the header over the hero, the Nature card lookup, the front door slideshow, the card pages' full-screen view. No dependencies. */
+/* ouisi.co — the menu drawer, the header over the hero, the Nature card lookup, the front door slideshow and reviews, the card pages' full-screen view. No dependencies. */
 (function () {
   // Menu: the shop's drawer, from the left. Escape, the veil and the close button all shut it;
   // focus stays inside while it is open and returns to the menu button after.
@@ -149,6 +149,32 @@
       new IntersectionObserver(function (en) { hold('away', !en[en.length - 1].isIntersecting); }).observe(show);
     }
   }
+  // Front door reviews: the arrows move one quote at a time; a swipe works too; nothing moves on its own (Paul, 11-12).
+  var rv = document.querySelector('.reviews');
+  if (rv) {
+    var rvTrack = rv.querySelector('.track'), rvItems = rvTrack.querySelectorAll('.review');
+    var rvPrev = rv.querySelector('.prev'), rvNext = rv.querySelector('.next');
+    var rvCalm = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var rvAt = function () {
+      var step = rvItems.length > 1 ? rvItems[1].offsetLeft - rvItems[0].offsetLeft : 1;
+      return Math.max(0, Math.min(rvItems.length - 1, Math.round(rvTrack.scrollLeft / step)));
+    };
+    var rvMark = function () {
+      var i = rvAt();
+      rvPrev.setAttribute('aria-disabled', i <= 0 ? 'true' : 'false');
+      rvNext.setAttribute('aria-disabled', i >= rvItems.length - 1 ? 'true' : 'false');
+    };
+    var rvGo = function (d) {
+      var i = Math.max(0, Math.min(rvItems.length - 1, rvAt() + d));
+      rvTrack.scrollTo({ left: rvItems[i].offsetLeft - rvItems[0].offsetLeft, behavior: rvCalm.matches ? 'auto' : 'smooth' });
+    };
+    rvPrev.addEventListener('click', function () { rvGo(-1); });
+    rvNext.addEventListener('click', function () { rvGo(1); });
+    rvTrack.addEventListener('scroll', function () { window.requestAnimationFrame(rvMark); }, { passive: true });
+    rv.querySelector('.arrows').hidden = false;
+    rvMark();
+  }
+
   // Nature card pages, phone: the card and its whole photo open full screen (Paul, 11-09). Escape, the close
   // button and a tap beside the picture shut it; the two bars switch between card and photo.
   var viewer = document.querySelector('dialog.viewer');

@@ -202,6 +202,19 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 .review .who{font-size:15px;font-weight:600;line-height:1.4}
 .review .who small{display:block;font-size:13px;font-weight:400;color:var(--ink-2)}
 .review .tick{color:var(--green)}
+/* Front door reviews: five quotes in a row, one showing; the arrows or a swipe move them, never a timer (Paul, 11-12).
+   Without script the row still swipes and the arrows stay hidden. Every quote takes the tallest one's height. */
+.reviews{width:100%;display:flex;flex-direction:column;align-items:center;gap:10px}
+.reviews .track{display:flex;gap:16px;width:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:4px 0 14px;overscroll-behavior-x:contain}
+.reviews .track::-webkit-scrollbar{display:none}
+.reviews .track:focus-visible{outline:2px solid var(--green);outline-offset:2px;border-radius:12px}
+.reviews .review{flex:0 0 100%;scroll-snap-align:start;justify-content:center}
+.reviews .arrows{display:flex;gap:16px}
+.reviews .arrows[hidden]{display:none}
+.reviews .arrows button{width:44px;height:44px;border-radius:50%;border:0;background:#fff;color:#4F6D3D;box-shadow:inset 0 0 0 2px var(--green);display:grid;place-items:center;cursor:pointer;padding:0;transition:background-color .2s,color .2s,opacity .2s}
+.reviews .arrows button:hover{background:var(--green);color:#fff}
+.reviews .arrows button[aria-disabled="true"]{opacity:.35;cursor:default;background:#fff;color:#4F6D3D}
+.reviews .arrows button:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 .rooms{line-height:2.2}
 .rooms .dot{display:none}
 /* phones: one link per line with space between, so a link that wraps reads as one (Paul, 11-02) */
