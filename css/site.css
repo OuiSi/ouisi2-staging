@@ -356,6 +356,7 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
    that isn't open yet (Smithsonian NMNH, "coming soon") gets a plain tile the shape of a door's picture, no link */
 @media (min-width:741px){.sec>.doors.two{grid-template-columns:repeat(2,minmax(0,1fr));max-width:800px}}
 .door.soon .pic{aspect-ratio:3/2;border-radius:12px;background:var(--soon,#e9e5da)}
+.door.soon .pic img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:12px}   /* the Smithsonian cards (Paul, 11-11: "Yes, add it"); no link until the portal opens */
 /* the Nature card and photographer pages (Paul, 11-09: canvas 6Mj9FTbUh1XVdya9E6b8Z3; /learn/nature-cards/N/,
    /learn/nature-photographers/<name>/): the portal's content and order, the site's look */
 .nc-top,.np-top{padding-top:48px}
