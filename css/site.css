@@ -84,6 +84,7 @@ input::placeholder{color:var(--placeholder)}
 .cols{display:flex;flex-direction:column;align-items:center;gap:20px;width:100%}
 .col{display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center;width:100%;min-width:0}
 .fig{width:320px;max-width:100%}
+.fig.photo{height:auto;border-radius:12px;box-shadow:0 2px 10px rgba(40,40,40,.08)}   /* a photograph beside text: the corners and shadow of every other photo on the site (/apps, the portal doors), not the cut-out collages (11-12) */
 /* phones: text sits 36px from the edge — between ours (24) and the shop's (48): Paul, 11-02, "a bit tight" at 48;
    pictures, set tiles, screenshots, cards and buttons stay at 24px (Paul, 10-30: "Match the shop") */
 @media (max-width:740px){
