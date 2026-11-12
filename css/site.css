@@ -121,7 +121,7 @@ input::placeholder{color:var(--placeholder)}
 .drawer-more>summary::-webkit-details-marker{display:none}
 .drawer-more>summary::after{content:"+";font-family:var(--sans);font-weight:400;font-size:28px;line-height:1;color:#4F6D3D}
 .drawer-more[open]>summary::after{content:"\2212"}
-.drawer-more>summary:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+.drawer-more>summary:focus-visible{outline:none;box-shadow:inset 0 -3px 0 var(--green)}   /* keyboard focus: a green bar inside the row, never over the items under it (Paul, 11-11: the green box over "OuiSi Original") */   /* inside the row, so it never covers the items under it (Paul, 11-11: the green box over "OuiSi Original") */
 .drawer-sub{list-style:none;margin:-10px 0 0;padding:0 0 14px 18px}
 .drawer-sub a{padding:10px 0;font-size:18px;font-weight:600;line-height:1.3}
 body.menu-open{overflow:hidden}
