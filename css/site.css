@@ -225,8 +225,8 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 .ftr .colf p{font-size:17px;line-height:1.7}
 .ftr .colf p.eb{font-size:13px;line-height:1.5}   /* the boards: footer headings in eyebrow type */
 .ftr .colf p.links{line-height:2.4}
-.ftr .links{display:grid;grid-template-rows:repeat(4,auto);grid-auto-flow:column;grid-auto-columns:minmax(max-content,1fr);column-gap:24px}
-@media (max-width:300px){.ftr .links{grid-auto-columns:minmax(0,1fr);column-gap:16px}}   /* and the menu may wrap there, rather than widen the page */   /* the menu in two columns, 4 + 3, at every size (Paul, 11-03) */
+.ftr .links{display:grid;grid-template-rows:repeat(5,auto);grid-auto-flow:column;grid-auto-columns:minmax(max-content,1fr);column-gap:24px}
+@media (max-width:300px){.ftr .links{grid-auto-columns:minmax(0,1fr);column-gap:16px}}   /* and the menu may wrap there, rather than widen the page */   /* the menu in two columns at every size (Paul, 11-03): 5 + 4 since Learning Portals and Resources replaced Learning and care (11-11) */
 @media (min-width:301px) and (max-width:339px),(min-width:1000px) and (max-width:1099px){.ftr .links{grid-template-columns:minmax(0,1fr) minmax(max-content,1fr)}}   /* where "Learning and care" can't sit on one line beside "Terms of Service", it wraps as Learning / and care (11-10) */
 .ftr .links a{display:block;line-height:1.35;padding:.525em 0}   /* one line: the same 2.4 row as before; a link that wraps keeps its two lines together (11-10) */
 .ftr .links a:hover{text-decoration:underline;text-underline-offset:4px}
@@ -352,6 +352,10 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 .door .pic img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:12px}
 .door h2{margin-top:8px}
 .door p{margin:0;max-width:30em;color:var(--ink-2)}
+/* the Learning Portals and Resources hubs (Paul, 11-11: "separate hubs"): Resources has two doors, centred; a portal
+   that isn't open yet (Smithsonian NMNH, "coming soon") gets a plain tile the shape of a door's picture, no link */
+@media (min-width:741px){.sec>.doors.two{grid-template-columns:repeat(2,minmax(0,1fr));max-width:800px}}
+.door.soon .pic{aspect-ratio:3/2;border-radius:12px;background:var(--soon,#e9e5da)}
 /* the Nature card and photographer pages (Paul, 11-09: canvas 6Mj9FTbUh1XVdya9E6b8Z3; /learn/nature-cards/N/,
    /learn/nature-photographers/<name>/): the portal's content and order, the site's look */
 .nc-top,.np-top{padding-top:48px}
@@ -459,6 +463,7 @@ button.zoom.full{padding:0;background:none}
 @media (min-width:1000px){.pairs .card .face{width:54px;height:54px}}
 .pairs .subj{margin:8px 0 0;font-size:min(14px,calc(100cqi / var(--fit,1)));font-weight:600;line-height:1.35}   /* --fit as for the headings: a long joined pair ("Burrow Entrance") shrinks to its card at 240px (11-10) */
 .pairs .by{font-size:13px;color:var(--ink-2);text-decoration:underline;text-underline-offset:3px}
+.pairs .who{margin:0;font-size:13px;line-height:1.4;color:var(--ink-2)}   /* a Getty card's artist and date (11-11) */
 /* Paul, 11-06: "All 210 Nature cards" right under the cards, six cards on phones, then the line, then the photographers */
 @media (max-width:740px){.pairs li:nth-child(n+7){display:none}}
 /* /learn, our photographers (Paul, 11-09): all sixteen portraits, each to their profile; 4 by 4 on a phone, 8 by 2 from 741px */
@@ -623,3 +628,10 @@ button.zoom.full{padding:0;background:none}
 .pairs.people{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media (min-width:741px){.pairs.people{grid-template-columns:repeat(6,minmax(0,1fr))}}
 @media (min-width:1000px){.pairs.people{grid-template-columns:repeat(8,minmax(0,1fr))}}
+
+/* the Getty portal (Paul, 11-11: "a similar page as we have for the OuiSi nature portal … we can show that it's sold out"):
+   its one set in a tile of its own, centred; the button says Sold out and goes nowhere (OuiSi holds no Getty stock: FACTS) */
+.tiles.one{display:grid;grid-auto-flow:row;grid-template-columns:minmax(0,1fr);overflow:visible;max-width:300px;margin:0 auto}
+.btn.off{opacity:.55;cursor:default}
+.ph-box{width:100%;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;text-align:center;background:#fff;border:2px dashed var(--line,#ccc);font-size:13px;color:var(--ink-2)}
+.snail-pair .who,.pairs .who{font-size:13px;color:var(--ink-2)}

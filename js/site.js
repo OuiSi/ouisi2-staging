@@ -72,7 +72,7 @@
       if (n >= 1 && n <= 210) {
         window.location.href = new URL(n + '/index.html', form.action).href;
       } else {
-        if (hint) hint.textContent = 'Nature cards are numbered 1 to 210.';
+        if (hint) hint.textContent = form.getAttribute('data-hint') || 'Nature cards are numbered 1 to 210.';   // the Getty portal's says Art Cards (11-11)
         input.focus();
       }
     });
