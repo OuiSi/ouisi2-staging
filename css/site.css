@@ -658,12 +658,11 @@ button.zoom.full{padding:0;background:none}
    Its classes carry a g- prefix (build.py); /resources/teachers/ lists them, each guide is /resources/teachers/<slug>/.
    Card / Guide / Planning switch: js/site.js. Prints the view chosen on screen, without the site's header and footer. */
 .guide,.guides-sec{--g-accent:#4F6D3D;--g-accent-soft:#EEF3E8;--g-warn:#9A5422;--g-warn-soft:#FBF1E7;--g-say:#3E5A2E;--g-mid:var(--ink-2);--g-line:var(--line);--g-small:var(--sans)}
-.draft-note{max-width:640px;margin:0 auto 32px;padding:10px 14px;border:2px dashed #C0392B;border-radius:8px;color:#8E2B20;font-size:15px;line-height:1.5}
 .g-intro{max-width:640px;margin:0 auto 40px;font-size:17px}
 .guides-index{max-width:1100px;margin:0 auto;text-align:left}
 .g-section-head{font:600 13px/1.2 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--g-accent);margin:40px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--g-line)}
 .guides-index .g-section-head:first-child{margin-top:0}
-.g-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.g-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(260px,100%),1fr));gap:16px}
 .g-guide-tile{display:block;border:1px solid var(--g-line);border-radius:12px;padding:16px 18px;text-decoration:none;color:inherit;background:#fff;transition:border-color .15s}
 .g-guide-tile:hover{border-color:var(--g-accent)}
 .g-guide-tile .g-eyebrow{font:600 11px/1.2 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--g-accent);margin-bottom:6px}
@@ -732,3 +731,108 @@ button.zoom.full{padding:0;background:none}
   .guide .g-phase-head{break-after:avoid;margin-bottom:5px}
   .guide .g-cols{grid-template-columns:1fr 1fr;margin-top:10px;gap:10px}
 }
+@media (max-width:360px){   /* Paul's phone at its largest text (~240–290 px): no sideways scroll */
+  .guide .g-viewtoggle{width:100%}
+  .guide .g-viewtoggle button{flex:1 1 0;padding:10px 6px}
+  .guide .g-lede,.guide .g-ladder{grid-template-columns:1fr;gap:2px 0}
+  .guide .g-lede dd,.guide .g-ladder dd{margin-bottom:8px}
+}
+.guide dd,.guide li,.guide p{overflow-wrap:anywhere}
+@media (max-width:480px){.guide .g-spine span{white-space:normal}.guide .g-spine .g-step{display:inline;padding-right:8px}.guide .g-spine .g-t{white-space:nowrap}}   /* long step names wrap on narrow phones */
+
+/* ---- Teaching guides list, direction A (Paul, 11-13: "ok" to the design canvas): a filter bar over the guides' groups.
+   Desktop: everything in one sticky bar. Phone: search, a scrolling row of subjects, and a Filters sheet. js/site.js. */
+.gx{width:100%;max-width:1200px;margin:0 auto;text-align:left;--gx-acc:#4F6D3D;--gx-tint:#EEF3E8}
+.gx-sr{position:absolute;left:-9999px}
+.gx-start{margin:0 0 20px;padding:16px 20px;background:var(--cream);border-radius:12px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 24px;font-size:16px}
+.gx-start-label{font:600 13px/1.3 var(--sans);letter-spacing:1px;text-transform:uppercase;color:var(--gx-acc);width:100%}
+@media (min-width:741px){.gx-start-label{width:auto}}
+.gx-start a{color:var(--gx-acc);font-weight:600}
+.gx-bar{position:sticky;top:var(--hdr-h);z-index:10;margin:0 0 36px;padding:16px 20px;background:#fff;border:1px solid var(--line);border-radius:12px;display:flex;flex-direction:column;gap:14px}
+.gx-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.gx-top{gap:10px 18px}
+.gx-search{flex:1 1 300px;position:relative;display:block;min-width:0}
+.gx-search input{width:100%;box-sizing:border-box;height:44px;padding:0 14px;border:1px solid #C9C7C2;border-radius:8px;background:var(--bg);font:400 16px/1 var(--sans);color:var(--ink)}
+.gx-search input::placeholder{color:#6E6E69}
+.gx-count{margin:0;font-weight:600;font-size:16px}
+.gx-clear,.gx-clear2{min-height:44px;padding:0 4px;background:none;border:0;color:var(--gx-acc);font:600 15px/1 var(--sans);text-decoration:underline;cursor:pointer}
+.gx-label{font:600 13px/1.3 var(--sans);letter-spacing:1px;text-transform:uppercase;color:var(--ink-2);margin-right:6px}
+.gx-subjects button,.gx-flags button{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--ink);font:500 15px/1.2 var(--sans);cursor:pointer}
+.gx-subjects button:hover,.gx-flags button:hover{border-color:var(--gx-acc)}
+.gx-subjects button[aria-pressed="true"],.gx-flags button[aria-pressed="true"]{background:var(--gx-acc);border-color:var(--gx-acc);color:#fff}
+.gx-n{font:500 13px/1 var(--sans);color:var(--ink-2)}
+[aria-pressed="true"] .gx-n{color:#E6EEDF}
+.gx-box{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:4px;border:1.5px solid #8A8A85;box-sizing:border-box}
+[aria-pressed="true"] .gx-box{border-color:#fff}
+[aria-pressed="true"] .gx-box::after{content:"\2713";font-size:13px;line-height:1;color:#fff}
+.gx-set{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.gx-seg{display:flex;flex-wrap:wrap;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.gx-seg button{min-width:48px;min-height:44px;padding:0 14px;border:0;border-right:1px solid var(--line);background:#fff;color:var(--ink);font:500 15px/1.15 var(--sans);cursor:pointer}
+.gx-seg button:last-child{border-right:0}
+.gx-seg button[aria-pressed="true"]{background:var(--gx-acc);color:#fff;font-weight:600}
+.gx-open{display:none;align-items:center;gap:8px;min-height:44px;padding:0 14px;border:1px solid var(--gx-acc);border-radius:8px;background:#fff;color:var(--gx-acc);font:600 15px/1 var(--sans);cursor:pointer}
+.gx-badge{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 5px;box-sizing:border-box;border-radius:10px;background:var(--gx-acc);color:#fff;font-size:12px}
+.gx-sheet-head,.gx-sheet-foot{display:none}
+.gx-more{display:flex;flex-wrap:wrap;align-items:center;gap:12px 28px}
+.gx-sheet-body{display:contents}
+.gx-results{display:flex;flex-direction:column;gap:48px}
+.gx-group{display:flex;flex-direction:column;gap:16px}
+.gx-group-head{margin:0;padding-bottom:10px;border-bottom:1px solid var(--line);display:flex;align-items:baseline;gap:12px;font-size:26px;letter-spacing:-.4px;text-align:left}
+.gx-group-n{font:500 15px/1 var(--sans);color:var(--ink-2);letter-spacing:0}
+.gx-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:20px}
+.gx-tile{display:flex;flex-direction:column;gap:8px;padding:20px 22px;background:#fff;border:1px solid var(--line);border-radius:12px;text-decoration:none;color:var(--ink);transition:border-color .15s}
+.gx-tile:hover{border-color:var(--gx-acc)}
+.gx-eb{font:600 13px/1.3 var(--sans);letter-spacing:1px;text-transform:uppercase;color:var(--gx-acc)}
+.gx-title{font-family:var(--display);font-weight:700;font-size:21px;line-height:1.2;letter-spacing:-.3px}
+.gx-blurb{font-size:16px;line-height:1.5;color:var(--ink-2);flex-grow:1}
+.gx-pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.gx-pill{display:inline-block;padding:3px 10px;border-radius:999px;background:#F2F1EC;color:#3F3F3B;font:500 13px/1.4 var(--sans)}
+.gx-pill-g{background:var(--gx-tint);color:#3A5230;font-weight:600}
+.gx-none{padding:48px 24px;text-align:center;background:var(--cream);border-radius:12px;display:flex;flex-direction:column;gap:12px;align-items:center}
+.gx-none p{margin:0;color:var(--ink-2)}
+.gx-none .gx-none-title{font-family:var(--display);font-weight:700;font-size:26px;color:var(--ink)}
+.gx-bar[hidden],.gx-tile[hidden],.gx-group[hidden],.gx-none[hidden],.gx-badge[hidden],.gx-clear[hidden]{display:none}
+@media (max-width:740px){
+  .gx-bar{margin:0 calc(-1 * var(--gutter)) 28px;padding:12px var(--gutter) 10px;border-radius:0;border-left:0;border-right:0;gap:10px}
+  .gx-top{gap:8px}
+  .gx-search{flex:1 1 0}
+  .gx-open{display:inline-flex}
+  .gx-count{order:5;width:100%;font-weight:500;font-size:15px;color:var(--ink-2)}
+  .gx-top .gx-clear{order:6;min-height:32px}
+  .gx-subjects{flex-wrap:nowrap;overflow-x:auto;margin:0 calc(-1 * var(--gutter));padding:2px var(--gutter);scrollbar-width:none}
+  .gx-subjects::-webkit-scrollbar{display:none}
+  .gx-subjects .gx-label{position:absolute;left:-9999px}
+  .gx-subjects button{flex:none;white-space:nowrap;min-height:40px;padding:0 14px}
+  .gx-more{display:none}
+  .gx-more.open{display:flex;flex-direction:column;flex-wrap:nowrap;gap:0;align-items:stretch;position:fixed;left:0;right:0;bottom:0;z-index:70;max-height:85vh;max-height:85svh;background:#fff;border-radius:16px 16px 0 0;box-shadow:0 0 0 100vmax rgba(0,0,0,.45)}
+  .gx-sheet-head{display:flex;align-items:center;justify-content:space-between;padding:12px var(--gutter);border-bottom:1px solid #ECEAE4}
+  .gx-sheet-head p{margin:0;font-family:var(--display);font-weight:700;font-size:22px}
+  .gx-close{width:44px;height:44px;margin-right:-10px;background:none;border:0;font-size:30px;line-height:1;color:var(--ink);cursor:pointer}
+  .gx-sheet-body{display:flex;flex-direction:column;gap:22px;padding:18px var(--gutter);overflow-y:auto;flex:1 1 auto;min-height:0}
+  .gx-set{flex-direction:column;flex-wrap:nowrap;align-items:stretch;gap:10px;flex:none}
+  .gx-set .gx-label{font-size:16px;letter-spacing:0;text-transform:none;color:var(--ink);margin:0}
+  .gx-seg{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));grid-auto-rows:minmax(44px,auto);align-content:start;gap:6px;border:0;border-radius:0;flex:none}
+  .gx-seg button{border:1px solid var(--line);border-radius:8px;padding:0 6px}
+  .gx-seg button:last-child{border-right:1px solid var(--line)}
+  .gx-flags button{border-radius:8px;justify-content:flex-start;text-align:left}
+  .gx-flags .gx-n{margin-left:auto}
+  .gx-sheet-foot{display:flex;gap:12px;padding:12px var(--gutter) 20px;border-top:1px solid #ECEAE4}
+  .gx-show{flex-grow:1;min-height:48px;background:var(--green);color:#fff;border:0;border-radius:8px;font:600 15px/1 var(--sans);letter-spacing:2px;text-transform:uppercase;cursor:pointer}
+  body.gx-sheet-open{overflow:hidden}
+  .gx-group-head{font-size:22px}
+  .gx-tile{padding:16px 18px}
+  .gx-title{font-size:20px}
+}
+
+/* Beta (Paul, 11-13: "Can't we say something like first drafts or in beta?" — the line on Teacher Tools, a tag on each guide) */
+.beta-tag,.g-beta-tag{display:inline-block;vertical-align:middle;padding:3px 10px;border-radius:999px;background:#FFF1D6;color:#7A4A00;border:1px solid #E8C98A;font:600 13px/1.3 var(--sans);letter-spacing:1px;text-transform:uppercase}
+.beta-line{max-width:640px;margin:0 auto 32px;font-size:17px}
+.beta-line .beta-tag{margin-right:6px}
+.guide .g-head h1{display:inline;margin-right:12px}
+.guide .g-head .g-beta-tag{position:relative;top:-6px}
+.guide .g-head .g-meta{margin-top:10px}
+@media print{.beta-tag,.g-beta-tag{border-color:#999;background:#fff;color:#000}}
+.beta-line a{color:#4F6D3D;text-decoration:underline;font-weight:600}
+
+#what .narrow{max-width:680px}   /* "What's a OuiSi?": ~70 characters a line on desktop, not ~110 (Paul, 11-13: "do you think the margins aren't big enough? This looks funny") */
+.gx-group-head{flex-wrap:wrap;column-gap:12px;row-gap:2px}.gx-group-n{white-space:nowrap}   /* the count moves to its own line as a whole, never leaving a word behind (orphan check, 11-13) */

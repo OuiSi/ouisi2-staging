@@ -39,6 +39,105 @@
     });
   }
 
+  // Teaching guides list (Paul, 11-13, direction A): search, subject, grade, time and four toggles narrow the 43 guides;
+  // every button shows how many guides it would leave. On a phone the grade, time and toggles open in a sheet.
+  (function () {   // its own scope: the names below (more, pick, count …) are used elsewhere in this file
+  var gx = document.querySelector('.gx');
+  if (gx) {
+    var bar = gx.querySelector('.gx-bar'); bar.hidden = false;
+    var pick = { q: '', subject: '', grade: '', time: '', np: false, mv: false, grp: false, any: false };
+    var tiles = gx.querySelectorAll('.gx-tile'), groupsEls = gx.querySelectorAll('.gx-group');
+    var input = bar.querySelector('input[type=search]'), more = bar.querySelector('.gx-more'), openBtn = bar.querySelector('.gx-open');
+    var badge = bar.querySelector('.gx-badge'), countEl = bar.querySelector('.gx-count'), clearBtn = bar.querySelector('.gx-clear');
+    var showBtn = bar.querySelector('.gx-show'), noneEl = gx.querySelector('.gx-none');
+    var info = [];
+    for (var i = 0; i < tiles.length; i++) {
+      var tl = tiles[i], grp = tl.closest('.gx-group');
+      info.push({ el: tl, subject: grp.getAttribute('data-subject'), grades: ' ' + tl.getAttribute('data-grades') + ' ', min: +tl.getAttribute('data-min'),
+        np: tl.getAttribute('data-np') === '1', mv: tl.getAttribute('data-mv') === '1', grp: tl.getAttribute('data-grp') === '1', nat: tl.getAttribute('data-nat') === '1',
+        text: (tl.textContent + ' ' + grp.querySelector('.gx-group-head').textContent).toLowerCase() });
+    }
+    var inTime = function (t, m) { return t === '10' ? m <= 15 : t === '30' ? m >= 20 && m <= 30 : t === '45' ? m >= 35 : true; };
+    var fits = function (g, p) {
+      if (p.subject && g.subject !== p.subject) return false;
+      if (p.grade && g.grades.indexOf(' ' + p.grade + ' ') < 0) return false;
+      if (p.time && !inTime(p.time, g.min)) return false;
+      if (p.np && !g.np) return false;
+      if (p.mv && !g.mv) return false;
+      if (p.grp && !g.grp) return false;
+      if (p.any && g.nat) return false;
+      if (p.q && g.text.indexOf(p.q) < 0) return false;
+      return true;
+    };
+    var count = function (change) {   // how many guides the current choices plus one change would leave
+      var p = {}, k, n = 0;
+      for (k in pick) p[k] = pick[k];
+      for (k in change) p[k] = change[k];
+      for (var c = 0; c < info.length; c++) if (fits(info[c], p)) n++;
+      return n;
+    };
+    var plural = function (n) { return n + (n === 1 ? ' guide' : ' guides'); };
+    var apply = function () {
+      var shown = 0, c, g, b, k;
+      for (c = 0; c < info.length; c++) { var ok = fits(info[c], pick); info[c].el.hidden = !ok; if (ok) shown++; }
+      for (g = 0; g < groupsEls.length; g++) {
+        var left = groupsEls[g].querySelectorAll('.gx-tile:not([hidden])').length;
+        groupsEls[g].hidden = !left;
+        groupsEls[g].querySelector('.gx-group-n').textContent = plural(left);
+      }
+      var subjBtns = bar.querySelectorAll('[data-subject]');
+      for (b = 0; b < subjBtns.length; b++) {
+        var sv = subjBtns[b].getAttribute('data-subject');
+        subjBtns[b].setAttribute('aria-pressed', String(pick.subject === sv));
+        subjBtns[b].querySelector('.gx-n').textContent = count({ subject: sv });
+      }
+      var segs = bar.querySelectorAll('[data-grade],[data-time]');
+      for (b = 0; b < segs.length; b++) {
+        k = segs[b].hasAttribute('data-grade') ? 'grade' : 'time';
+        segs[b].setAttribute('aria-pressed', String(pick[k] === segs[b].getAttribute('data-' + k)));
+      }
+      var flagBtns = bar.querySelectorAll('[data-flag]');
+      for (b = 0; b < flagBtns.length; b++) {
+        k = flagBtns[b].getAttribute('data-flag'); var ch = {}; ch[k] = true;
+        flagBtns[b].setAttribute('aria-pressed', String(pick[k]));
+        flagBtns[b].querySelector('.gx-n').textContent = count(ch);
+      }
+      var extra = (pick.grade ? 1 : 0) + (pick.time ? 1 : 0) + (pick.np ? 1 : 0) + (pick.mv ? 1 : 0) + (pick.grp ? 1 : 0) + (pick.any ? 1 : 0);
+      var active = extra + (pick.subject ? 1 : 0) + (pick.q ? 1 : 0);
+      badge.hidden = !extra; badge.textContent = extra;
+      countEl.textContent = active ? shown + ' of ' + info.length + ' guides' : plural(info.length);
+      clearBtn.hidden = !active;
+      showBtn.textContent = shown ? 'Show ' + plural(shown) : 'No guides match';
+      noneEl.hidden = shown > 0;
+    };
+    var clearAll = function () { pick = { q: '', subject: '', grade: '', time: '', np: false, mv: false, grp: false, any: false }; input.value = ''; apply(); };
+    var lastFocus = null;
+    var setSheet = function (open) {
+      more.classList.toggle('open', open); openBtn.setAttribute('aria-expanded', String(open));
+      document.body.classList.toggle('gx-sheet-open', open);
+      if (open) { lastFocus = document.activeElement; var f = more.querySelector('button'); if (f) f.focus(); }
+      else if (lastFocus) lastFocus.focus();
+    };
+    input.addEventListener('input', function () { pick.q = input.value.trim().toLowerCase(); apply(); });
+    bar.addEventListener('click', function (e) {
+      var t = e.target.closest('button'); if (!t) return;
+      if (t.hasAttribute('data-subject')) pick.subject = t.getAttribute('data-subject');
+      else if (t.hasAttribute('data-grade')) pick.grade = t.getAttribute('data-grade');
+      else if (t.hasAttribute('data-time')) pick.time = t.getAttribute('data-time');
+      else if (t.hasAttribute('data-flag')) { var fk = t.getAttribute('data-flag'); pick[fk] = !pick[fk]; }
+      else if (t.classList.contains('gx-clear') || t.classList.contains('gx-clear2')) clearAll();
+      else if (t === openBtn) { setSheet(!more.classList.contains('open')); return; }
+      else if (t.classList.contains('gx-close') || t.classList.contains('gx-show')) { setSheet(false); return; }
+      else return;
+      apply();
+    });
+    gx.querySelector('.gx-clear3').addEventListener('click', clearAll);
+    document.addEventListener('click', function (e) { if (more.classList.contains('open') && !more.contains(e.target) && !openBtn.contains(e.target)) setSheet(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && more.classList.contains('open')) setSheet(false); });
+    apply();
+  }
+  })();
+
   // Teaching guides: Card / Guide / Planning (the teacher session's switch, 11-13). The choice is remembered on this device.
   var guide = document.querySelector('.guide');
   if (guide) {
