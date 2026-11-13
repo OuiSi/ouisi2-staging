@@ -39,6 +39,37 @@
     });
   }
 
+  // Teaching guides: Card / Guide / Planning (the teacher session's switch, 11-13). The choice is remembered on this device.
+  var guide = document.querySelector('.guide');
+  if (guide) {
+    var vbtns = guide.querySelectorAll('.g-viewtoggle button'), views = ['card', 'guide', 'plan'];
+    var setView = function (v) {
+      if (views.indexOf(v) < 0) v = 'guide';
+      for (var q = 0; q < views.length; q++) guide.classList.toggle('view-' + views[q], views[q] === v);
+      for (var q2 = 0; q2 < vbtns.length; q2++) vbtns[q2].setAttribute('aria-pressed', String(vbtns[q2].getAttribute('data-view') === v));
+      try { localStorage.setItem('ouisi-guide-view', v); } catch (e) {}
+    };
+    for (var vb = 0; vb < vbtns.length; vb++) vbtns[vb].addEventListener('click', function (e) { setView(e.currentTarget.getAttribute('data-view')); });
+    try { var saved = localStorage.getItem('ouisi-guide-view'); if (saved) setView(saved); } catch (e) {}
+  }
+
+  // Pictures that wait for the hero photo (/portals' doors; Paul, 11-13): on a slow phone they shared its bandwidth and
+  // held it back by seconds. They start once the hero photo has arrived (or failed). Without script, <noscript> shows them.
+  var later = document.querySelectorAll('img[data-after-hero]');
+  if (later.length) {
+    var start = function () {
+      for (var k = 0; k < later.length; k++) {
+        var im = later[k];
+        if (im.getAttribute('data-src')) { im.src = im.getAttribute('data-src'); im.removeAttribute('data-src'); }
+      }
+    };
+    var heroPh = document.querySelector('.hero img.ph');
+    if (heroPh && !heroPh.complete) {
+      heroPh.addEventListener('load', start);
+      heroPh.addEventListener('error', start);
+    } else start();
+  }
+
   // Header over the hero: transparent while the page is at the top, the shop's green once it moves.
   var hdr = document.querySelector('.hdr[data-transparent]');
   if (hdr) {
