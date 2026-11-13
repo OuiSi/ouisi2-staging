@@ -834,5 +834,5 @@ button.zoom.full{padding:0;background:none}
 @media print{.beta-tag,.g-beta-tag{border-color:#999;background:#fff;color:#000}}
 .beta-line a{color:#4F6D3D;text-decoration:underline;font-weight:600}
 
-#what .narrow{max-width:680px}   /* "What's a OuiSi?": ~70 characters a line on desktop, not ~110 (Paul, 11-13: "do you think the margins aren't big enough? This looks funny") */
+#what .narrow,#sets .narrow{max-width:680px}   /* "What's a OuiSi?": ~70 characters a line on desktop, not ~110 (Paul, 11-13: "do you think the margins aren't big enough? This looks funny") */
 .gx-group-head{flex-wrap:wrap;column-gap:12px;row-gap:2px}.gx-group-n{white-space:nowrap}   /* the count moves to its own line as a whole, never leaving a word behind (orphan check, 11-13) */
