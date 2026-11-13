@@ -153,6 +153,7 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 .hero.show .slide{grid-area:1/1;position:relative;display:grid}
 .hero.show .slide:not(.on){visibility:hidden}
 .hero.show .slide.top{z-index:1}
+.hero.show .in{padding-bottom:72px}   /* room for the bars: at large page zoom the buttons set the hero's height and sat 7px above them (Paul, 11-12: "this progress bar is bothering me") */
 .hero .t{letter-spacing:-.0225em}   /* slide 2's heading (an h2), set as the h1: size and box with .hero h1 above */
 .hero.show .cta{display:grid;grid-auto-flow:row;grid-auto-columns:1fr;justify-content:center}   /* buttons of one width, as drawn */
 @media (min-width:741px){.hero.show .cta{grid-auto-flow:column}}
