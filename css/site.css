@@ -690,6 +690,7 @@ button.zoom.full{padding:0;background:none}
 .guide .g-spine .g-step:last-of-type::after{content:""}
 .guide .g-spine .g-t{color:var(--g-accent);font-weight:600}
 .guide .g-spine .g-edge{font-style:italic}
+.guide .g-viewhint{margin:-8px 0 16px;font:400 14px/1.4 var(--sans);color:var(--g-mid)}
 .guide .g-viewtoggle{display:flex;margin:0 0 16px;border:1px solid var(--g-line);border-radius:8px;overflow:hidden;width:fit-content;font:600 14px/1 var(--sans)}
 .guide .g-viewtoggle button{appearance:none;border:0;background:transparent;color:var(--g-mid);padding:10px 16px;min-height:44px;cursor:pointer;font:inherit}
 .guide .g-viewtoggle button[aria-pressed="true"]{background:var(--g-accent);color:#fff}
@@ -722,7 +723,7 @@ button.zoom.full{padding:0;background:none}
 .guide .g-foot b{color:var(--ink);font-weight:600}
 @media print{
   @page{margin:12mm}
-  .bar,.hdr,.ftr,.drawer,.skip,.g-back,.guide .g-viewtoggle{display:none !important}
+  .bar,.hdr,.ftr,.drawer,.skip,.g-back,.guide .g-viewtoggle,.guide .g-viewhint{display:none !important}
   body{background:#fff;color:#000;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .guide{max-width:none;padding:0;font-size:10pt}
   .guide .g-spine{position:static;background:#fff;border-color:#ccc}
@@ -828,6 +829,7 @@ button.zoom.full{padding:0;background:none}
 .beta-tag,.g-beta-tag{display:inline-block;vertical-align:middle;padding:3px 10px;border-radius:999px;background:#FFF1D6;color:#7A4A00;border:1px solid #E8C98A;font:600 13px/1.3 var(--sans);letter-spacing:1px;text-transform:uppercase}
 .beta-line{max-width:640px;margin:0 auto 32px;font-size:17px}
 .beta-line .beta-tag{margin-right:6px}
+.col .beta-line{max-width:none;margin:0;font-size:inherit}   /* beside the photo under "How the guides work" (11-16): a paragraph like the others in the column */
 .guide .g-head h1{display:inline;margin-right:12px}
 .guide .g-head .g-beta-tag{position:relative;top:-6px}
 .guide .g-head .g-meta{margin-top:10px}

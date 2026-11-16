@@ -63,8 +63,9 @@
     }
     // The time a guide takes at the chosen grade; with no grade chosen, or none given for it, the tile's own time.
     var minsAt = function (g, grade) { return grade && g.routes[grade] ? g.routes[grade] : g.min; };
-    // The three spans join up, so every guide is in exactly one: at a chosen grade a guide can take 16 or 32 min (11-16).
-    var inTime = function (t, m) { return t === '10' ? m <= 15 : t === '30' ? m > 15 && m <= 30 : t === '45' ? m > 30 : true; };
+    // The time a teacher has: every guide that fits in it (Paul, 11-16: "Time you have"). Ranges (16–30 …) showed a
+    // teacher with 20 minutes guides of 22–30 at grade K.
+    var inTime = function (t, m) { return t ? m <= +t : true; };
     var fits = function (g, p) {
       if (p.subject && g.subject !== p.subject) return false;
       if (p.grade && g.grades.indexOf(' ' + p.grade + ' ') < 0) return false;
@@ -151,11 +152,13 @@
   // Teaching guides: Card / Guide / Planning (the teacher session's switch, 11-13). The choice is remembered on this device.
   var guide = document.querySelector('.guide');
   if (guide) {
-    var vbtns = guide.querySelectorAll('.g-viewtoggle button'), views = ['card', 'guide', 'plan'];
+    var vbtns = guide.querySelectorAll('.g-viewtoggle button'), views = ['card', 'guide', 'plan'], vhint = guide.querySelector('.g-viewhint');
+    var hints = { card: 'Just the steps, to hold while you teach.', guide: 'The whole guide, to read before the lesson.', plan: 'The whole guide, plus the skills it exercises.' };
     var setView = function (v) {
       if (views.indexOf(v) < 0) v = 'guide';
       for (var q = 0; q < views.length; q++) guide.classList.toggle('view-' + views[q], views[q] === v);
       for (var q2 = 0; q2 < vbtns.length; q2++) vbtns[q2].setAttribute('aria-pressed', String(vbtns[q2].getAttribute('data-view') === v));
+      if (vhint) vhint.textContent = hints[v];
       try { localStorage.setItem('ouisi-guide-view', v); } catch (e) {}
     };
     for (var vb = 0; vb < vbtns.length; vb++) vbtns[vb].addEventListener('click', function (e) { setView(e.currentTarget.getAttribute('data-view')); });
