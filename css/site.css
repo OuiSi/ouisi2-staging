@@ -16,7 +16,7 @@
   --ink:#282828;         /* shop text */
   --ink-2:#5A5A56;       /* secondary text */
   --line:#DBDAD7;        /* shop border */
-  --green:#5F814A;       /* shop primary button + announcement bar */
+  --green:#44693D;       /* buttons + announcement bar: Forest Green, white text 6.3:1 (Paul, 11-16: the shop's #5F814A gave 4.44:1, under AA) */
   --green-2:#87B46B;     /* shop header */
   --star:#F2C94C;
   --footer:#282828;
@@ -63,7 +63,7 @@ input::placeholder{color:var(--placeholder)}
 .sub{color:var(--ink-2)}
 
 /* buttons — the shop's primary, with its hover: a 7% shade that wipes down from the top */
-.btn{--b:95,129,74;display:inline-flex;align-items:center;justify-content:center;height:var(--btn-h);padding:0 30px;border:0;border-radius:8px;color:#fff;font-size:15px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;line-height:1;white-space:nowrap;cursor:pointer;
+.btn{--b:68,105,61;display:inline-flex;align-items:center;justify-content:center;height:var(--btn-h);padding:0 30px;border:0;border-radius:8px;color:#fff;font-size:15px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;line-height:1;white-space:nowrap;cursor:pointer;
   background-color:rgb(var(--b));
   background-image:linear-gradient(178deg,rgb(var(--b)),rgb(var(--b)) 10%,rgba(0,0,0,.07) 10%,rgba(0,0,0,.07) 100%),linear-gradient(rgb(var(--b)),rgb(var(--b)));
   background-position:100% -100%,100% 100%;background-repeat:no-repeat;background-size:100% 200%,100% 100%;
