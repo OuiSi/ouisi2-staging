@@ -55,13 +55,20 @@
       var tl = tiles[i], grp = tl.closest('.gx-group');
       info.push({ el: tl, subject: grp.getAttribute('data-subject'), grades: ' ' + tl.getAttribute('data-grades') + ' ', min: +tl.getAttribute('data-min'),
         np: tl.getAttribute('data-np') === '1', mv: tl.getAttribute('data-mv') === '1', grp: tl.getAttribute('data-grp') === '1', nat: tl.getAttribute('data-nat') === '1',
-        text: (tl.textContent + ' ' + grp.querySelector('.gx-group-head').textContent).toLowerCase() });
+        text: (tl.textContent + ' ' + grp.querySelector('.gx-group-head').textContent).toLowerCase(),
+        routes: {}, minEl: tl.querySelector('.gx-pill-min') });
+      // Teaching minutes at each grade ("K:16 1:16 2:35"), where the guide's ladder gives them (Paul, 11-16).
+      var rt = (tl.getAttribute('data-routes') || '').split(' ');
+      for (var r = 0; r < rt.length; r++) { var kv = rt[r].split(':'); if (kv.length === 2) info[i].routes[kv[0]] = +kv[1]; }
     }
-    var inTime = function (t, m) { return t === '10' ? m <= 15 : t === '30' ? m >= 20 && m <= 30 : t === '45' ? m >= 35 : true; };
+    // The time a guide takes at the chosen grade; with no grade chosen, or none given for it, the tile's own time.
+    var minsAt = function (g, grade) { return grade && g.routes[grade] ? g.routes[grade] : g.min; };
+    // The three spans join up, so every guide is in exactly one: at a chosen grade a guide can take 16 or 32 min (11-16).
+    var inTime = function (t, m) { return t === '10' ? m <= 15 : t === '30' ? m > 15 && m <= 30 : t === '45' ? m > 30 : true; };
     var fits = function (g, p) {
       if (p.subject && g.subject !== p.subject) return false;
       if (p.grade && g.grades.indexOf(' ' + p.grade + ' ') < 0) return false;
-      if (p.time && !inTime(p.time, g.min)) return false;
+      if (p.time && !inTime(p.time, minsAt(g, p.grade))) return false;
       if (p.np && !g.np) return false;
       if (p.mv && !g.mv) return false;
       if (p.grp && !g.grp) return false;
@@ -79,7 +86,10 @@
     var plural = function (n) { return n + (n === 1 ? ' guide' : ' guides'); };
     var apply = function () {
       var shown = 0, c, g, b, k;
-      for (c = 0; c < info.length; c++) { var ok = fits(info[c], pick); info[c].el.hidden = !ok; if (ok) shown++; }
+      for (c = 0; c < info.length; c++) {
+        var ok = fits(info[c], pick); info[c].el.hidden = !ok; if (ok) shown++;
+        if (info[c].minEl) info[c].minEl.textContent = minsAt(info[c], pick.grade) + ' min';
+      }
       for (g = 0; g < groupsEls.length; g++) {
         var left = groupsEls[g].querySelectorAll('.gx-tile:not([hidden])').length;
         groupsEls[g].hidden = !left;
