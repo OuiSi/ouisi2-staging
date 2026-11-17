@@ -149,6 +149,10 @@
   }
   })();
 
+  // Memory-care recipes: the print button (11-16)
+  var mrPrint = document.querySelector('.mr-print');
+  if (mrPrint) mrPrint.addEventListener('click', function () { window.print(); });
+
   // Teaching guides: Card / Guide / Planning (the teacher session's switch, 11-13). The choice is remembered on this device.
   var guide = document.querySelector('.guide');
   if (guide) {

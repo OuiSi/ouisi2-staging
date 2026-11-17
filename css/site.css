@@ -374,6 +374,10 @@ body:has(.bar){--peek:240px}           /* the announcement bar (~60px) sits abov
 @media (min-width:741px){.sec>.doors.two{grid-template-columns:repeat(2,minmax(0,1fr));max-width:800px}}
 .door.soon .pic{aspect-ratio:3/2;border-radius:12px;background:var(--soon,#e9e5da)}
 .door.soon .pic img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:12px}   /* the Smithsonian cards (Paul, 11-11: "Yes, add it"); no link until the portal opens */
+/* the /portals card walls, smaller with a thin line (Paul, 11-17: "This feels a bit overwhelming visually", then "B, smaller");
+   /resources' photo doors keep the full width */
+.walls .door .pic{width:78%}
+.walls .door .pic img{box-sizing:border-box;border:1px solid rgba(16,24,32,.18)}
 /* the Nature card and photographer pages (Paul, 11-09: canvas 6Mj9FTbUh1XVdya9E6b8Z3; /learn/nature-cards/N/,
    /learn/nature-photographers/<name>/): the portal's content and order, the site's look */
 .nc-top,.np-top{padding-top:48px}
@@ -872,3 +876,71 @@ button.zoom.full{padding:0;background:none}
   .gx-grid{grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:16px}
 }
 @media (max-width:340px){.gx-set:nth-child(2) .gx-seg{grid-template-columns:repeat(2,minmax(0,1fr))}}   /* narrow phones: two by two, never three and one */
+/* ---- Memory-care recipes (11-16): the build's structure and print rules (ouisi-site). The look of the pages is the
+   Memory care session's, in its own section of this file. */
+.mr-ph{display:flex;align-items:center;justify-content:center;aspect-ratio:4/3;width:100%;max-width:360px;background:#eceae4;border:1px dashed #b9b6ad;border-radius:8px;color:#5a5a56;font:500 14px/1.3 var(--sans);text-align:center;padding:12px}
+.mr-draft{display:inline-block;margin:0 8px;padding:2px 10px;border-radius:999px;background:#FBF1E7;color:#7a4419;font:600 13px/1.6 var(--sans)}
+.mr-card-title{text-wrap:balance}   /* like h1–h3: balanced lines, so 'Recipe' isn't left alone at 240–280 (11-16) */
+.mr-print{min-height:44px;padding:0 18px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);font:600 15px/1 var(--sans);cursor:pointer}
+@media print{
+  .bar,.hdr,.ftr,.drawer,.skip,.mr-back,.mr-print,.mr-draft,.mr-ph{display:none !important}
+  .mr{max-width:none;margin:0;padding:0}
+  .mr-photo{max-width:45mm;height:auto;break-inside:avoid}
+  .mr li{break-inside:avoid}
+  .mr-credit{font-size:10pt}
+}
+
+
+/* ---- Memory care: the door's recipe cards and the recipe pages' look (Memory care page session, 11-16).
+   Paul, 11-16: "Simple will be best, caregivers are usually already burned out, or they often use English as a
+   second language." So: one column, left-aligned, one step per row with a big number, photos beside the step on
+   desktop and under it on phones. Colours: Forest Green (step numbers, white text 6.3:1) and one palette ground,
+   Pale Ivory #F1E6B2 (ink on it 14.2:1), for "what you need". Type sizes are the site's until Paul decides. */
+.sec.mr-door:empty{display:none}
+.mr-cards{width:100%;max-width:760px;display:grid;gap:16px}
+.mr-card{display:block;text-align:left;padding:20px 24px;border:1px solid var(--line);border-radius:12px;background:#fff;color:inherit;text-decoration:none;transition:border-color .15s}
+.mr-card:hover,.mr-card:focus-visible{border-color:var(--green)}
+.mr-card-title{display:block;font:700 20px/1.3 var(--display);color:var(--ink)}
+.mr-card-who{display:block;margin-top:4px;color:var(--ink-2);font-size:16px;line-height:1.5}
+.mr-card .mr-draft{margin:10px 0 0}
+
+.mr{max-width:760px;margin:0 auto;padding:28px var(--gutter) 72px;text-align:left}
+.mr-back{margin:0 0 16px;font-size:15px}
+.mr-back a{color:var(--green);text-decoration:none;font-weight:600}
+.mr-back a::before{content:"← "}
+.mr-back a:hover{text-decoration:underline}
+.mr-head h1{font:700 clamp(26px,7vw,44px)/1.15 var(--display);margin:0 0 10px;overflow-wrap:break-word}
+.mr-head .mr-draft{margin:0 0 10px}
+.mr-who{margin:0 0 16px;color:var(--ink-2)}
+.mr-credit{margin:16px 0 0;padding-top:12px;border-top:1px solid var(--line);color:var(--ink-2);font-size:14px;line-height:1.5}
+.mr>section{margin-top:44px}
+.mr h2{font:700 24px/1.25 var(--display);margin:0 0 14px}
+.mr p{margin:14px 0 0}
+.mr h2+p{margin-top:0}
+.mr ul{margin:0;padding-left:1.25em}
+.mr ul li{margin:8px 0;padding-left:4px}
+.mr-need{background:#F1E6B2;border-radius:12px;padding:22px 22px 24px}
+.mr-steps ol{list-style:none;margin:0;padding:0;counter-reset:mr-step}
+.mr-steps ol>li{counter-increment:mr-step;position:relative;min-height:40px;margin:0 0 22px;padding-left:54px}
+.mr-steps ol>li::before{content:counter(mr-step);position:absolute;left:0;top:0;width:38px;height:38px;border-radius:50%;background:var(--green);color:#fff;font:700 18px/38px var(--display);text-align:center}
+.mr-text{display:block}
+.mr-photo{display:block;margin-top:12px;width:100%;max-width:320px;height:auto;border-radius:8px}
+.mr .mr-ph{overflow-wrap:anywhere}   /* the placeholders' file names, at 240-260 px */
+@media (max-width:300px){.mr-card{padding:16px 18px}.mr-card-title{font-size:17px}.mr-need{padding:18px 14px 20px}.mr ul{padding-left:1.1em}.mr-steps ol>li{padding-left:48px}}
+.mr-help dl{margin:0}
+.mr-help dt{font-weight:700;margin:0;padding-top:16px;border-top:1px solid var(--line)}
+.mr-help dt:first-child{border-top:0;padding-top:0}
+.mr-help dd{margin:6px 0 18px}
+@media (min-width:741px){
+  .mr{padding-top:40px}
+  .mr h2{font-size:28px}
+  .mr-steps ol>li:has(>.mr-photo){display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:24px;align-items:start}
+  .mr-steps ol>li>.mr-photo{margin-top:0}
+}
+@media print{
+  .mr-steps ol>li::before{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .mr-need{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .mr-head h1{font-size:20pt}
+  .mr h2{font-size:15pt}
+  .mr>section{margin-top:16pt}
+}
