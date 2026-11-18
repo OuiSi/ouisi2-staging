@@ -60,6 +60,12 @@ input::placeholder{color:var(--placeholder)}
 .eb{font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;line-height:1.5}
 .lk{font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
 .lk:hover{text-decoration-thickness:2px}
+/* Bigger places to tap, nothing moves (Paul, 11-18: classrooms on tablets). The small text links (Learn more, Read
+   more in the Guide, Watch, a photographer's name under a card, the bar's link) were 16-22px tall; an invisible
+   layer around each makes them at least 44px, as Apple asks for a finger. (.games .watch stays absolute: its rule
+   below wins.) */
+.lk,.by,.bar a,.credit a,.nc-links a,.facts dd a,.langs a{position:relative}
+.lk::after,.by::after,.bar a::after,.credit a::after,.nc-links a::after,.facts dd a::after,.langs a::after{content:"";position:absolute;inset:-14px 0}   /* taller only: reaching sideways made boxes wider than their columns (orphans.py, 11-18) */
 .sub{color:var(--ink-2)}
 
 /* buttons — the shop's primary, with its hover: a 7% shade that wipes down from the top */
