@@ -208,7 +208,7 @@
   }
 
   // Nature card lookup: the number on the card -> that card's page on ouisi.co (11-10; the printed QR codes still open
-  // go.ouisi.co/2/N). The form's action is the list of all cards, so the card's page sits beside it at N/index.html.
+  // go.ouisi.co/2/N). The form's action is the list of all cards (its folder, 11-18), so the card's page is N/ beside it.
   var form = document.getElementById('lookup');
   if (form) {
     var input = form.querySelector('input');
@@ -217,7 +217,7 @@
       e.preventDefault();
       var n = parseInt((input.value || '').replace(/\D/g, ''), 10);
       if (n >= 1 && n <= 210) {
-        window.location.href = new URL(n + '/index.html', form.action).href;
+        window.location.href = new URL(n + '/', form.action).href;
       } else {
         if (hint) hint.textContent = form.getAttribute('data-hint') || 'Nature cards are numbered 1 to 210.';   // the Getty portal's says Art Cards (11-11)
         input.focus();
