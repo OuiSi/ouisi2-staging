@@ -1,3 +1,4 @@
 User-agent: *
+Disallow: /daily/
 Allow: /
 Sitemap: https://ouisi.co/sitemap.xml
