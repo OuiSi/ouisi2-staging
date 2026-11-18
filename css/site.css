@@ -409,8 +409,9 @@ button.zoom.full{padding:0;background:none}
 .dt-only{display:none}
 @media (min-width:741px){.nc-pair.ph-only{display:none}.nc-pair.dt-only{display:flex}}   /* full screen is phone only (Paul, 11-09) */
 .facts{margin:28px 0 0;width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 16px;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-align:left}
-.facts dd{margin:6px 0 0;font-size:17px;font-weight:500;overflow-wrap:anywhere}
+.facts dd{margin:6px 0 0;font-size:17px;font-weight:500;overflow-wrap:anywhere;text-wrap:balance}
 .facts>div:only-child{grid-column:1 / -1}   /* a card with no date: its location takes the whole row (card 21, 11-10) */
+@media (max-width:300px){.facts{grid-template-columns:minmax(0,1fr);row-gap:14px}}   /* 240-260px: half a column is narrower than "Mozambique" (24 cards broke mid-word, 11-18), so Location above Date */
 .facts dd a{font-weight:400;text-decoration:underline;text-underline-offset:3px}
 .credit{margin-top:24px;display:flex;align-items:center;gap:14px;text-align:left}
 .credit img{width:52px;height:52px;border-radius:50%;object-fit:cover}
