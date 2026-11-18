@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Du+OJKJSbdUgz5nrHeWWINvez6XKDDU/tyj/5c2uvwo=' 'sha256-PUgyh42nd0h0Ha/SiT3dshEDN1WlVL+GoCq2W8sWdOA='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'self' https://go.ouisi.co; base-uri 'self'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Du+OJKJSbdUgz5nrHeWWINvez6XKDDU/tyj/5c2uvwo=' 'sha256-Kt/sT9/2YQTryIFZwwTMh2o9d45raZWV3DoheuFOURs='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'self' https://go.ouisi.co; base-uri 'self'; object-src 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>You're invited to a Photologue | OuiSi</title>
 <meta name="description" content="You've been invited to a game of OuiSi Photologue.">
@@ -19,7 +19,7 @@
 <link rel="preload" href="../fonts/poppins-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../fonts/figtree-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../fonts/figtree-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../css/site.css?v=171adbd2">
+<link rel="stylesheet" href="../css/site.css?v=3ae6ab6f">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -77,39 +77,56 @@
   <p class="eb">A game of visual&nbsp;connection</p>
   <h1>You're invited to a Photologue</h1>
   <p class="narrow" id="subtitle">If OuiSi Photologue is on your phone, tap below and you'll land in&nbsp;it.</p>
+  <div class="join-note warn" id="notOpened" role="status" hidden>
+    <p class="join-note-title">OuiSi Photologue didn't&nbsp;open.</p>
+    <p>If it's installed, open this page in Safari: tap <strong>…</strong> below, then <strong>Open in Safari</strong>.</p>
+    <p>If not, get the app below, then tap your invite link&nbsp;again.</p>
+  </div>
+  <div class="join-note" id="noCode" role="status" hidden>
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"></path><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"></path><path d="M4 4l16 16"></path></svg>
+    <p>This link is missing its game code. It may not have copied over completely. Try tapping the original link in your&nbsp;messages.</p>
+  </div>
   <a class="btn" id="openBtn" href="#" hidden>Open OuiSi Photologue</a>
-  <div class="join-steps">
+  <a class="lk join-getapp" id="getApp" href="#steps" hidden>Get the app</a>
+  <div class="join-phones" id="phones">
+    <figure class="shot"><img src="../img/apps/photologue-1-thread.webp" alt="OuiSi Photologue on iPhone: a Photologue, photos answering each other" width="1179" height="2556" loading="lazy"></figure>
+    <figure class="shot"><img src="../img/apps/photologue-4-conversation.webp" alt="OuiSi Photologue on iPhone: two photos in a Photologue and the conversation about them" width="1179" height="2556" loading="lazy"></figure>
+  </div>
+  <p class="join-cap">Photos answering each other, and the conversation about&nbsp;them.</p>
+  <div class="join-steps" id="steps">
     <h2 class="h5">Don't have the app&nbsp;yet?</h2>
     <ol>
-      <li><a href="https://testflight.apple.com/join/QNDk9C32">Install OuiSi Photologue from TestFlight.</a> It's a free public&nbsp;beta.</li>
-      <li>Open it once and sign in with your Apple&nbsp;ID.</li>
-      <li>Come back and tap your invite link again. You'll land in the&nbsp;Photologue.</li>
+      <li><span class="join-n" aria-hidden="true">1</span><div><p>Install OuiSi Photologue from TestFlight. It's a free public&nbsp;beta.</p><a class="btn ghost sm" href="https://testflight.apple.com/join/QNDk9C32">Get it on TestFlight</a></div></li>
+      <li><span class="join-n" aria-hidden="true">2</span><div><p>Open it once and tap <strong>Get Started</strong>. It uses the iCloud account already on your phone, so there is nothing to sign in&nbsp;to.</p></div></li>
+      <li><span class="join-n" aria-hidden="true">3</span><div><p>Come back and tap your invite link again. You'll land in the&nbsp;Photologue.</p></div></li>
     </ol>
   </div>
 </section>
 <script>
   // Invite links: ouisi.co/join?game=CODE. With the app installed, iOS opens it from the universal link and this page
   // never shows; it is seen when the app is missing, inside Messages' own browser, or on a non-iPhone.
+  // Three states (design 11-18): an invite (Open button), the app didn't open (a notice, Try again, Get the app),
+  // and a link without its code (a notice, no button).
   (function () {
     var game = new URLSearchParams(window.location.search).get("game");
-    var sub = document.getElementById("subtitle");
+    var sub = document.getElementById("subtitle"), btn = document.getElementById("openBtn");
     if (game && /^[A-Fa-f0-9-]{8,40}$/.test(game)) {
-      var btn = document.getElementById("openBtn");
       btn.href = "ouisi://join?game=" + encodeURIComponent(game);
       btn.hidden = false;
       btn.addEventListener("click", function () {
         // If the app opened, this page is in the background and the timer never fires.
         setTimeout(function () {
           if (document.visibilityState === "visible") {
-            sub.innerHTML = "OuiSi Photologue didn't open. If it's installed, open this page in Safari " +
-              "(tap <strong>&hellip;</strong> below, then <strong>Open in Safari</strong>). " +
-              "If not, get the app below, then tap your invite link again.";
+            sub.hidden = true;
+            document.getElementById("notOpened").hidden = false;
+            document.getElementById("getApp").hidden = false;
+            btn.textContent = "Try again";
           }
         }, 1500);
       });
     } else {
-      sub.textContent = "This link is missing its game code. It may not have copied over completely. " +
-        "Try tapping the original link in your messages.";
+      sub.hidden = true;
+      document.getElementById("noCode").hidden = false;
     }
   })();
 </script>
@@ -137,6 +154,6 @@
   </div>
   <p class="fine">OuiSi® is a registered trademark. © 2026 OuiSi&nbsp;Inc.</p>
 </footer>
-<script src="../js/site.js?v=171adbd2"></script>
+<script src="../js/site.js?v=3ae6ab6f"></script>
 </body>
 </html>
