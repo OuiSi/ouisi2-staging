@@ -54,6 +54,7 @@
     for (var i = 0; i < tiles.length; i++) {
       var tl = tiles[i], grp = tl.closest('.gx-group');
       info.push({ el: tl, subject: grp.getAttribute('data-subject'), grades: ' ' + tl.getAttribute('data-grades') + ' ', min: +tl.getAttribute('data-min'),
+        floor: +tl.getAttribute('data-floor') || +tl.getAttribute('data-min'),
         np: tl.getAttribute('data-np') === '1', mv: tl.getAttribute('data-mv') === '1', grp: tl.getAttribute('data-grp') === '1', nat: tl.getAttribute('data-nat') === '1',
         text: (tl.textContent + ' ' + grp.querySelector('.gx-group-head').textContent).toLowerCase(),
         routes: {}, minEl: tl.querySelector('.gx-pill-min') });
@@ -61,15 +62,23 @@
       var rt = (tl.getAttribute('data-routes') || '').split(' ');
       for (var r = 0; r < rt.length; r++) { var kv = rt[r].split(':'); if (kv.length === 2) info[i].routes[kv[0]] = +kv[1]; }
     }
-    // The time a guide takes at the chosen grade; with no grade chosen, or none given for it, the tile's own time.
-    var minsAt = function (g, grade) { return grade && g.routes[grade] ? g.routes[grade] : g.min; };
-    // The time a teacher has: every guide that fits in it (Paul, 11-16: "Time you have"). Ranges (16–30 …) showed a
-    // teacher with 20 minutes guides of 22–30 at grade K.
-    var inTime = function (t, m) { return t ? m <= +t : true; };
+    // A guide's time is a range (11-18, as the teacher master): its floor is the shortest the whole lesson runs with
+    // every step kept (one elastic step compressed), its full length the second number. At a chosen grade the guide's
+    // ladder may shorten it again by dropping whole steps (data-routes). The two trims compose: the grade's full time is
+    // its route; its floor is the floor scaled by route / full (never under 5 min), not the smaller of the two.
+    var fullAt = function (g, grade) { return grade && g.routes[grade] ? g.routes[grade] : g.min; };
+    var floorAt = function (g, grade) {
+      var route = fullAt(g, grade);
+      return route === g.min ? g.floor : Math.max(5, Math.round(g.floor * route / g.min));
+    };
+    // The time a teacher has (Paul, 11-18, as the master): a guide matches when that time falls inside its range — it
+    // fits the time and also fills it. The floor alone made 30 and 40 min both show all 43 (no floor is above 29).
+    var inTime = function (t, g, grade) { return t ? floorAt(g, grade) <= +t && fullAt(g, grade) >= +t : true; };
+    var minsText = function (g, grade) { var lo = floorAt(g, grade), hi = fullAt(g, grade); return (lo < hi ? lo + '–' + hi : hi) + ' min'; };
     var fits = function (g, p) {
       if (p.subject && g.subject !== p.subject) return false;
       if (p.grade && g.grades.indexOf(' ' + p.grade + ' ') < 0) return false;
-      if (p.time && !inTime(p.time, minsAt(g, p.grade))) return false;
+      if (p.time && !inTime(p.time, g, p.grade)) return false;
       if (p.np && !g.np) return false;
       if (p.mv && !g.mv) return false;
       if (p.grp && !g.grp) return false;
@@ -89,7 +98,7 @@
       var shown = 0, c, g, b, k;
       for (c = 0; c < info.length; c++) {
         var ok = fits(info[c], pick); info[c].el.hidden = !ok; if (ok) shown++;
-        if (info[c].minEl) info[c].minEl.textContent = minsAt(info[c], pick.grade) + ' min';
+        if (info[c].minEl) info[c].minEl.textContent = minsText(info[c], pick.grade);
       }
       for (g = 0; g < groupsEls.length; g++) {
         var left = groupsEls[g].querySelectorAll('.gx-tile:not([hidden])').length;
