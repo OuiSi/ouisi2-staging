@@ -846,6 +846,7 @@ button.zoom.full{padding:0;background:none}
   .gx-set{flex-direction:column;flex-wrap:nowrap;align-items:stretch;gap:10px;flex:none}
   .gx-set .gx-label{font-size:16px;letter-spacing:0;text-transform:none;color:var(--ink);margin:0}
   .gx-seg{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));grid-auto-rows:minmax(44px,auto);align-content:start;gap:6px;border:0;border-radius:0;flex:none}
+  .gx-seg.gx-seg-wide{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}   /* the Moment row's longer words (11-18) */
   .gx-seg button{border:1px solid var(--line);border-radius:8px;padding:0 6px}
   .gx-seg button:last-child{border-right:1px solid var(--line)}
   .gx-set:nth-child(2) .gx-seg{grid-template-columns:repeat(4,minmax(0,1fr))}   /* the four times in one row (Paul, 11-16: All / 10 / 20 / 30) */
@@ -878,7 +879,10 @@ button.zoom.full{padding:0;background:none}
   .gx{display:grid;grid-template-columns:272px minmax(0,1fr);gap:48px;align-items:start}
   .gx-bar{grid-column:1;position:static;margin:0;padding:20px 18px;gap:22px}   /* scrolls with the page: as a sticky column it was taller than the screen and cut off */
   .gx-more,.gx-sheet-body{display:contents}   /* grade, time and the extras join the column so they can be ordered: grade, time, subject, extras */
-  .gx-top{order:0}.gx-set:nth-child(1){order:1}.gx-set:nth-child(2){order:2}.gx-subjects{order:3}.gx-flags{order:4}
+  .gx-top{order:0}.gx-set:nth-child(1){order:1}.gx-set:nth-child(2){order:2}.gx-set:nth-child(3):not(.gx-flags){order:2}.gx-subjects{order:3}.gx-flags{order:4}   /* Moment after time (11-18) */
+  .gx-seg.gx-seg-wide{display:grid;grid-template-columns:minmax(0,1fr)}   /* its longer words, one per line in the column */
+  .gx-seg.gx-seg-wide button{border-right:0;border-bottom:1px solid var(--line);text-align:left}
+  .gx-seg.gx-seg-wide button:last-child{border-bottom:0}
   .gx-results{grid-column:2;gap:40px}
   .gx-top{flex-direction:column;align-items:stretch;gap:8px}
   .gx-search{flex:none}

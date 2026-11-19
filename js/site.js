@@ -45,7 +45,7 @@
   var gx = document.querySelector('.gx');
   if (gx) {
     var bar = gx.querySelector('.gx-bar'); bar.hidden = false;
-    var pick = { q: '', subject: '', grade: '', time: '', np: false, mv: false, grp: false, any: false };
+    var pick = { q: '', subject: '', grade: '', time: '', moment: '', np: false, mv: false, grp: false, any: false };
     var tiles = gx.querySelectorAll('.gx-tile'), groupsEls = gx.querySelectorAll('.gx-group');
     var input = bar.querySelector('input[type=search]'), more = bar.querySelector('.gx-more'), openBtn = bar.querySelector('.gx-open');
     var badge = bar.querySelector('.gx-badge'), countEl = bar.querySelector('.gx-count'), clearBtn = bar.querySelector('.gx-clear');
@@ -55,6 +55,7 @@
       var tl = tiles[i], grp = tl.closest('.gx-group');
       info.push({ el: tl, subject: grp.getAttribute('data-subject'), grades: ' ' + tl.getAttribute('data-grades') + ' ', min: +tl.getAttribute('data-min'),
         floor: +tl.getAttribute('data-floor') || +tl.getAttribute('data-min'),
+        moments: ' ' + (tl.getAttribute('data-moment') || '') + ' ',   // when a guide suits (11-18); none: it never matches a moment
         np: tl.getAttribute('data-np') === '1', mv: tl.getAttribute('data-mv') === '1', grp: tl.getAttribute('data-grp') === '1', nat: tl.getAttribute('data-nat') === '1',
         text: (tl.textContent + ' ' + grp.querySelector('.gx-group-head').textContent).toLowerCase(),
         routes: {}, minEl: tl.querySelector('.gx-pill-min') });
@@ -79,6 +80,7 @@
       if (p.subject && g.subject !== p.subject) return false;
       if (p.grade && g.grades.indexOf(' ' + p.grade + ' ') < 0) return false;
       if (p.time && !inTime(p.time, g, p.grade)) return false;
+      if (p.moment && g.moments.indexOf(' ' + p.moment + ' ') < 0) return false;
       if (p.np && !g.np) return false;
       if (p.mv && !g.mv) return false;
       if (p.grp && !g.grp) return false;
@@ -111,9 +113,9 @@
         subjBtns[b].setAttribute('aria-pressed', String(pick.subject === sv));
         subjBtns[b].querySelector('.gx-n').textContent = count({ subject: sv });
       }
-      var segs = bar.querySelectorAll('[data-grade],[data-time]');
+      var segs = bar.querySelectorAll('[data-grade],[data-time],[data-moment]');
       for (b = 0; b < segs.length; b++) {
-        k = segs[b].hasAttribute('data-grade') ? 'grade' : 'time';
+        k = segs[b].hasAttribute('data-grade') ? 'grade' : segs[b].hasAttribute('data-time') ? 'time' : 'moment';
         segs[b].setAttribute('aria-pressed', String(pick[k] === segs[b].getAttribute('data-' + k)));
       }
       var flagBtns = bar.querySelectorAll('[data-flag]');
@@ -122,7 +124,7 @@
         flagBtns[b].setAttribute('aria-pressed', String(pick[k]));
         flagBtns[b].querySelector('.gx-n').textContent = count(ch);
       }
-      var extra = (pick.grade ? 1 : 0) + (pick.time ? 1 : 0) + (pick.np ? 1 : 0) + (pick.mv ? 1 : 0) + (pick.grp ? 1 : 0) + (pick.any ? 1 : 0);
+      var extra = (pick.grade ? 1 : 0) + (pick.time ? 1 : 0) + (pick.moment ? 1 : 0) + (pick.np ? 1 : 0) + (pick.mv ? 1 : 0) + (pick.grp ? 1 : 0) + (pick.any ? 1 : 0);
       var active = extra + (pick.subject ? 1 : 0) + (pick.q ? 1 : 0);
       badge.hidden = !extra; badge.textContent = extra;
       countEl.textContent = active ? shown + ' of ' + info.length + ' guides' : plural(info.length);
@@ -130,7 +132,7 @@
       showBtn.textContent = shown ? 'Show ' + plural(shown) : 'No guides match';
       noneEl.hidden = shown > 0;
     };
-    var clearAll = function () { pick = { q: '', subject: '', grade: '', time: '', np: false, mv: false, grp: false, any: false }; input.value = ''; apply(); };
+    var clearAll = function () { pick = { q: '', subject: '', grade: '', time: '', moment: '', np: false, mv: false, grp: false, any: false }; input.value = ''; apply(); };
     var lastFocus = null;
     var setSheet = function (open) {
       more.classList.toggle('open', open); openBtn.setAttribute('aria-expanded', String(open));
@@ -144,6 +146,7 @@
       if (t.hasAttribute('data-subject')) pick.subject = t.getAttribute('data-subject');
       else if (t.hasAttribute('data-grade')) pick.grade = t.getAttribute('data-grade');
       else if (t.hasAttribute('data-time')) pick.time = t.getAttribute('data-time');
+      else if (t.hasAttribute('data-moment')) pick.moment = t.getAttribute('data-moment');
       else if (t.hasAttribute('data-flag')) { var fk = t.getAttribute('data-flag'); pick[fk] = !pick[fk]; }
       else if (t.classList.contains('gx-clear') || t.classList.contains('gx-clear2')) clearAll();
       else if (t === openBtn) { setSheet(!more.classList.contains('open')); return; }
